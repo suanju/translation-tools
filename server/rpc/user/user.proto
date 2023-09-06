@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package users;
+
+option go_package = "./pb";
+
+message UserRegisterReq {
+  string Email = 1;//用户邮箱
+  string Password = 2;//用户密码
+}
+
+message UserRegisterResp {
+  string code = 1;
+}
+
+service userService {
+  rpc register (UserRegisterReq) returns (UserRegisterResp);
+}
