@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.21.6
-// source: user.proto
+// source: users.proto
 
 package pb
 
@@ -155,12 +155,12 @@ func file_user_proto_rawDescGZIP() []byte {
 
 var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_user_proto_goTypes = []interface{}{
-	(*UserRegisterReq)(nil),  // 0: user.UserRegisterReq
-	(*UserRegisterResp)(nil), // 1: user.UserRegisterResp
+	(*UserRegisterReq)(nil),  // 0: users.UserRegisterReq
+	(*UserRegisterResp)(nil), // 1: users.UserRegisterResp
 }
 var file_user_proto_depIdxs = []int32{
-	0, // 0: user.userService.register:input_type -> user.UserRegisterReq
-	1, // 1: user.userService.register:output_type -> user.UserRegisterResp
+	0, // 0: users.userService.register:input_type -> users.UserRegisterReq
+	1, // 1: users.userService.register:output_type -> users.UserRegisterResp
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

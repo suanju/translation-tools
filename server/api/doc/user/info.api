@@ -1,0 +1,25 @@
+syntax = "v1"
+
+info(
+    desc: "用户信息"
+)
+
+
+type (
+    userInfoReq {
+    }
+
+    userInfoResp {
+        Email string `json:"email"`
+    }
+)
+@server(
+    jwt: Auth
+    group: user/info
+    prefix: /user
+)
+
+service usreInfo {
+    @handler UserInfo
+    get /getUserInfo (userInfoReq) returns (userInfoResp)
+}

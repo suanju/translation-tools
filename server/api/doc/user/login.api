@@ -6,8 +6,8 @@ info(
 
 type (
 	userLoginReq {
-		Email   string `json:"email"`
-		Passwod string `json:"password"`
+		Email   string `json:"email" validate:"email"`
+		Passwod string `json:"password" validate:"min=6"`
 	}
 
 	userLoinResp {
@@ -15,9 +15,9 @@ type (
 	}
 
 	userRegisterReq {
-		Email         string `json:"email"`
-		Password      string `json:"password"`
-		PasswordCheck string `json:"password_check"`
+		Email         string `json:"email" validate:"email"`
+		Password      string `json:"password" validate:"min=6"`
+		PasswordCheck string `json:"password_check" validate:"min=6"`
 	}
 
 	userRegisterResp {
@@ -26,7 +26,7 @@ type (
 )
 
 @server(
-	group: user/login
+	group: users/login
 	prefix: /users
 )
 
@@ -34,6 +34,6 @@ service  userLogin {
 	@handler UserLogin
 	post /login (userLoginReq) returns (userLoinResp)
 	
-	@handler UuserRegister
+	@handler UserRegister
 	post /register (userRegisterReq) returns (userRegisterResp)
 }

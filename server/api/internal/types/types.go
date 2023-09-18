@@ -2,8 +2,8 @@
 package types
 
 type UserLoginReq struct {
-	Email   string `json:"email"`
-	Passwod string `json:"password"`
+	Email   string `json:"email" validate:"email"`
+	Passwod string `json:"password" validate:"min=6"`
 }
 
 type UserLoinResp struct {
@@ -11,9 +11,9 @@ type UserLoinResp struct {
 }
 
 type UserRegisterReq struct {
-	Email         string `json:"email"`
-	Password      string `json:"password"`
-	PasswordCheck string `json:"password_check"`
+	Email         string `json:"email" validate:"email"`
+	Password      string `json:"password" validate:"min=6"`
+	PasswordCheck string `json:"password_check" validate:"min=6"`
 }
 
 type UserRegisterResp struct {
