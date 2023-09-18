@@ -3,89 +3,154 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
         alt="Your Company" />
-      <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">登入您的账户</h2>
+      <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        登入您的账户
+      </h2>
     </div>
-
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
       <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-        <form class="space-y-6" action="#" method="POST">
+        <Form class="space-y-6" @submit="submit" :validation-schema="schema" v-slot="{ errors }">
           <div>
-            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
-            <div class="mt-2">
-              <input id="email" name="email" type="email" autocomplete="email"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <label for="email" name="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+            <div class="relative mt-2 rounded-md shadow-sm">
+              <Field type="email" name="email" id="email" :class="{
+                ...importClass,
+                'placeholder:text-red-300': errors.email,
+                'ring-red-500': errors.email,
+                'text-red-900': errors.email,
+                'focus:ring-red-500': errors.email,
+              }" v-model="form.email" />
+              <div v-show="errors.email" class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+              </div>
             </div>
-          </div>
-
-          <div>
-            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">密码</label>
-            <div class="mt-2">
-              <input id="password" name="password" type="password" autocomplete="current-password"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <input id="remember-me" name="remember-me" type="checkbox"
-                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-              <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-900">记住密码</label>
-            </div>
-
-            <div class="text-sm leading-6">
-              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">忘记密码</a>
-            </div>
+            <ErrorMessage name="email">
+              <p class="mt-2 text-xs text-red-600 font-extralight" id="email-error">
+                {{ errors.email }}
+              </p>
+            </ErrorMessage>
           </div>
           <div>
-            <button type="submit"
-              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
-              in</button>
+            <label for="password" name="password" class="block text-sm font-medium leading-6 text-gray-900">密码</label>
+            <div class="relative mt-2 rounded-md shadow-sm">
+              <Field type="password" autocomplete="password" name="password" id="password" :class="{
+                ...importClass,
+                'placeholder:text-red-300': errors.password,
+                'ring-red-500': errors.password,
+                'text-red-900': errors.password,
+                'focus:ring-red-500': errors.password,
+              }" v-model="form.password" />
+              <div v-show="errors.password" class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+              </div>
+            </div>
+            <ErrorMessage name="password">
+              <p class="mt-2 text-xs text-red-600 font-extralight" id="email-error">
+                {{ errors.password }}
+              </p>
+            </ErrorMessage>
           </div>
-        </form>
-
+          <div>
+            <button id="submit" type="submit" :disabled="isLoading"
+              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <span v-show="isLoading">
+                <LoadingIcon class="icon animate-spin w-6 h-6" :fontControlled="false" />
+              </span>
+              <span v-show="!isLoading">login</span>
+            </button>
+          </div>
+        </Form>
         <div>
           <div class="relative mt-10">
             <div class="absolute inset-0 flex items-center" aria-hidden="true">
               <div class="w-full border-t border-gray-200" />
             </div>
-            <!-- <div class="relative flex justify-center text-sm font-medium leading-6">
-              <span class="bg-white px-6 text-gray-900">Or continue with</span>
-            </div> -->
           </div>
-
-          <!-- <div class="mt-6 grid grid-cols-2 gap-4">
-            <a href="#"
-              class="flex w-full items-center justify-center gap-3 rounded-md bg-[#1D9BF0] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1D9BF0]">
-              <svg class="h-5 w-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
-              </svg>
-              <span class="text-sm font-semibold leading-6">Twitter</span>
-            </a>
-
-            <a href="#"
-              class="flex w-full items-center justify-center gap-3 rounded-md bg-[#24292F] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]">
-              <svg class="h-5 w-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
-                  clip-rule="evenodd" />
-              </svg>
-              <span class="text-sm font-semibold leading-6">GitHub</span>
-            </a>
-          </div> -->
         </div>
       </div>
       <p class="mt-10 text-center text-sm text-gray-500">
         没有账户 ?
-        {{ ' ' }}
+        {{ " " }}
         <span @click="router.push({ name: 'register' })"
-          class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">注册新账户</span>
+          class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">去注册</span>
       </p>
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+import { LoginForm } from "~/types/pages/login/login";
+import { Field, Form, ErrorMessage } from "vee-validate";
+import { ExclamationCircleIcon } from "@heroicons/vue/20/solid";
+import { httpLogin } from "~/apis/user";
+import { HttpLoginReq } from "~/types/apis/user";
+import * as yup from "yup";
+import Swal from "sweetalert2";
+import { useUserStore } from "~/store/user";
+import { UserInfo } from "~/types/store/users";
+import LoadingIcon from "~/assets/icons/loading.svg"
 
+const router = useRouter();
+const isLoading = ref(false);
+const userSotre = useUserStore();
+const form = reactive<LoginForm>({
+  email: "",
+  password: "", 
+});
 
-<script setup>
-const router = useRouter()
+const submit = async () => {
+  try {
+    isLoading.value = true;
+    const response = await httpLogin(<HttpLoginReq>{
+      email: form.email,
+      password: form.password,
+    });
+    console.log(123);
+    isLoading.value = false;
+    Swal.fire({
+      title: "登入成功",
+      heightAuto: false,
+      icon: "success",
+    });
+    userSotre.setUserInfo(<UserInfo>{
+      id: response.data?.id,
+      email: response.data?.email,
+      token: response.data?.token,
+    });
+    router.push({ name: "hone" });
+  } catch (err) {
+    isLoading.value = false;
+    Swal.fire({
+      title: (err as Error).message ? (err as Error).message : (err as any).msg,
+      heightAuto: false,
+      icon: "error",
+    });
+  }
+};
+
+const schema = yup.object({
+  email: yup.string().required("请输入您的邮箱").email("您的邮箱格式不正确"),
+  password: yup.string().required("请输入您的密码").min(6, "密码长度最短为6位"),
+});
+
+const importClass = [
+  "block",
+  "w-full",
+  "rounded-md",
+  "border-0",
+  "py-1.5",
+  "text-gray-900",
+  "shadow-sm",
+  "ring-1",
+  "ring-inset",
+  "ring-gray-300",
+  "placeholder:text-gray-400",
+  "focus:ring-2",
+  "focus:ring-inset",
+  "focus:ring-indigo-600",
+  "sm:text-sm",
+  "sm:leading-6",
+].reduce((acc, current) => {
+  acc[current as string] = true;
+  return acc;
+}, {} as Record<string, boolean>);
 </script>

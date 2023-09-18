@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
@@ -25,6 +26,7 @@ type (
 	tnUsersModel interface {
 		Insert(ctx context.Context, data *TnUsers) (sql.Result, error)
 		FindOne(ctx context.Context, id int64) (*TnUsers, error)
+		FindOneByEmail(ctx context.Context, email string) (*TnUsers, error)
 		Update(ctx context.Context, data *TnUsers) error
 		Delete(ctx context.Context, id int64) error
 	}
@@ -37,11 +39,10 @@ type (
 	TnUsers struct {
 		Id           int64        `db:"id"`            // id
 		Email        string       `db:"email"`         // 邮箱
-		Username     string       `db:"username"`      // 用户名称
 		Password     string       `db:"password"`      // 密码
 		PasswordSalt string       `db:"password_salt"` // 密码盐
-		Status       int64        `db:"status"`        // 用户状态 0 未激活 1已激活 2禁用
-		CreateAt     sql.NullTime `db:"create_at"`     // 创建时间
+		Status       int64        `db:"status"`        // 用户状态 0->未激活 1->已激活 2->禁用
+		CreateAt     time.Time    `db:"create_at"`     // 创建时间
 		UpdateAt     sql.NullTime `db:"update_at"`     // 更新时间
 	}
 )
@@ -73,15 +74,29 @@ func (m *defaultTnUsersModel) FindOne(ctx context.Context, id int64) (*TnUsers, 
 	}
 }
 
+func (m *defaultTnUsersModel) FindOneByEmail(ctx context.Context, email string) (*TnUsers, error) {
+	var resp TnUsers
+	query := fmt.Sprintf("select %s from %s where `email` = ? limit 1", tnUsersRows, m.table)
+	err := m.conn.QueryRowCtx(ctx, &resp, query, email)
+	switch err {
+	case nil:
+		return &resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
 func (m *defaultTnUsersModel) Insert(ctx context.Context, data *TnUsers) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?)", m.table, tnUsersRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Id, data.Email, data.Username, data.Password, data.PasswordSalt, data.Status)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?)", m.table, tnUsersRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.Id, data.Email, data.Password, data.PasswordSalt, data.Status)
 	return ret, err
 }
 
-func (m *defaultTnUsersModel) Update(ctx context.Context, data *TnUsers) error {
+func (m *defaultTnUsersModel) Update(ctx context.Context, newData *TnUsers) error {
 	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, tnUsersRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Email, data.Username, data.Password, data.PasswordSalt, data.Status, data.Id)
+	_, err := m.conn.ExecCtx(ctx, query, newData.Email, newData.Password, newData.PasswordSalt, newData.Status, newData.Id)
 	return err
 }
 

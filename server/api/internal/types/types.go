@@ -2,11 +2,13 @@
 package types
 
 type UserLoginReq struct {
-	Email   string `json:"email" validate:"email"`
-	Passwod string `json:"password" validate:"min=6"`
+	Email    string `json:"email" validate:"email"`
+	Password string `json:"password" validate:"min=6"`
 }
 
-type UserLoinResp struct {
+type UserLoginResp struct {
+	Id    int64  `json:"id"`
+	Email string `json:"email"`
 	Token string `json:"token"`
 }
 
@@ -17,5 +19,14 @@ type UserRegisterReq struct {
 }
 
 type UserRegisterResp struct {
+	Id    int64  `json:"id"`
+	Email string `josn:"email"`
 	Token string `josn:"tokne"`
+}
+
+type UserInfoReq struct {
+}
+
+type UserInfoResp struct {
+	Email string `json:"email"`
 }

@@ -1,7 +1,7 @@
 package results
 
 const (
-	CodeSuccess       int = 200
+	CodeSuccess       int = 0
 	CodeInvalidParams int = 201
 	CodeNoData        int = 202
 	CodeServerBusy    int = 500
@@ -16,7 +16,7 @@ const (
 )
 
 var _ = map[int]string{
-	CodeSuccess:       "success",
+	CodeSuccess:       "ok",
 	CodeInvalidParams: "请求参数错误",
 	CodeServerBusy:    "服务繁忙",
 	CodeNoData:        "没有数据",

@@ -7,10 +7,12 @@ info(
 type (
 	userLoginReq {
 		Email   string `json:"email" validate:"email"`
-		Passwod string `json:"password" validate:"min=6"`
+		Password string `json:"password" validate:"min=6"`
 	}
 
-	userLoinResp {
+	userLoginResp {
+		Id int64  `json:"id"`
+		Email string `json:"email"`
 		Token string `json:"token"`
 	}
 
@@ -21,18 +23,20 @@ type (
 	}
 
 	userRegisterResp {
+		Id int64  `json:"id"`
+		Email string `josn:"email"`
 		Token string `josn:"tokne"`
 	}
 )
 
 @server(
-	group: users/login
-	prefix: /users
+	group: user/login
+	prefix: /user
 )
 
-service  userLogin {
+service  api {
 	@handler UserLogin
-	post /login (userLoginReq) returns (userLoinResp)
+	post /login (userLoginReq) returns (userLoginResp)
 	
 	@handler UserRegister
 	post /register (userRegisterReq) returns (userRegisterResp)
