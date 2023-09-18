@@ -7,6 +7,10 @@ import (
 
 type Config struct {
 	rest.RestConf
+	Auth struct {
+		AccessSecret string
+		AccessExpire int64
+	}
 	//rpc服务相关
 	User zrpc.RpcClientConf
 }

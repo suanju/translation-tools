@@ -1,8 +1,8 @@
-Name: users.rpc
+Name: user.rpc
 ListenOn: 0.0.0.0:8080
 Etcd:
   Hosts:
   - 127.0.0.1:2379
-  Key: users.rpc
+  Key: user.rpc
 Mysql:
-  DataSource: root:123456@tcp(localhost:3306)/translation
+  DataSource: root:123456@tcp(localhost:3306)/translation?charset=utf8mb4&parseTime=True&loc=Local

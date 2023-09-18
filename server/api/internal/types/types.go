@@ -19,3 +19,10 @@ type UserRegisterReq struct {
 type UserRegisterResp struct {
 	Token string `josn:"tokne"`
 }
+
+type UserInfoReq struct {
+}
+
+type UserInfoResp struct {
+	Email string `json:"email"`
+}

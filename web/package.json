@@ -1,22 +1,40 @@
 {
-  "name": "nuxt-app",
+  "name": "translation",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build": "nuxt build  --dotenv .env.production",
+    "dev": "nuxt dev  --dotenv .env.development",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare" 
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "autoprefixer": "^10.4.15",
     "nuxt": "^3.7.0",
-    "postcss": "^8.4.29",
-    "tailwindcss": "^3.3.3"
+    "or": "^0.2.0",
+    "postcss": "^8.4.29"
   },
   "dependencies": {
+    "@element-plus/nuxt": "^1.0.5",
+    "@heroicons/vue": "^2.0.18",
+    "@nuxt/types": "^2.17.1",
+    "@nuxtjs/composition-api": "^0.33.1",
+    "@pinia/nuxt": "^0.4.11",
     "@tailwindcss/forms": "^0.5.6",
-    "sweetalert2": "^11.7.27"
-  }
+    "@types/yup": "^0.32.0",
+    "element-plus": "^2.3.12",
+    "pinia": "^2.1.6",
+    "sweetalert2": "^11.7.27",
+    "typescript": "^5.2.2",
+    "vee-validate": "^4.11.3",
+    "vue-heroicons": "^0.9.4",
+    "yup": "^1.2.0"
+  },
+  "version": "1.0.0",
+  "description": "多语言翻译工具",
+  "main": "index.js",
+  "license": "MIT"
 }

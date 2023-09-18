@@ -1,47 +1,31 @@
+import { UserInfo } from '~/types/store/users';
+import { defineStore } from "pinia"
+
+
 export const useUserStore = defineStore("user", () => {
-    let userInfoData = reactive<userInfo>({
+    let userInfoData = reactive<UserInfo>({
         id: 0,
         username: "",
-        photo: "",
+        email: "",
         token: "",
-        created_at: "",
-        liveData: {
-            address: "",
-            key: ""
-        },
-        //消息相关
-        unreadNotice: 0
     })
 
-    const setUserInfo = (info: userInfoRes) => {
-        userInfoData.username = info.username
+    const setUserInfo = (info: UserInfo) => {
         userInfoData.id = info.id
-        userInfoData.photo = info.photo
+        userInfoData.username = info.username
+        userInfoData.email = info.email
         userInfoData.token = info.token
-        userInfoData.created_at = info.created_at
-    }
-
-    const setUnreadNotice = (num: number) => {
-        userInfoData.unreadNotice = num
     }
 
     const loginOut = () => {
-        userInfoData.username = ""
         userInfoData.id = 0
-        userInfoData.photo = ""
+        userInfoData.username = ""
+        userInfoData.email = ""
         userInfoData.token = ""
-        userInfoData.created_at = ""
-        userInfoData.unreadNotice = 0
-        //清空消息
-        let chat = useChatListStore()
-        chat.chatListData = []
-        chat.tid = 0
-        chat.tUsername = ""
     }
     return {
         userInfoData,
         setUserInfo,
-        setUnreadNotice,
         loginOut
     }
 

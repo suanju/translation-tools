@@ -19,7 +19,7 @@ type (
     prefix: /user
 )
 
-service usreInfo {
+service api {
     @handler UserInfo
     get /getUserInfo (userInfoReq) returns (userInfoResp)
 }

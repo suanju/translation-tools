@@ -1,13 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import Swal from 'sweetalert2'
-import { useStore } from '@nuxtjs/composition-api`
-const { $store } = useNuxtApp()
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top',
-    showConfirmButton: false,
-    timer: 3000,
-})
+import { useUserStore } from '~/store/user';
 
 interface Result {
     code: number;
@@ -19,48 +12,45 @@ interface ResultData<T = any> extends Result {
     data?: T;
 }
 
-
-const URL: string = import.meta.env.VITE_BASE_URL;
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+})
 
 enum RequestEnums {
-    TIMEOUT = 60000,
+    TIMEOUT = 60000,//置超时时间
     SUCCESS = 200, // 请求成功
     OPERATIONFAIL = 500, // 操作失败
     NOTLOGIN = 303, // 操作失败
     FAIL = 999, // 请求失败
 }
 
-const config = {
-    // 默认地址
-    baseURL: URL as string,
-    // 设置超时时间
-    timeout: RequestEnums.TIMEOUT as number,
-
-}
-
-const router = useRouter()
-const userInfo = useUserStore()
 
 class RequestHttp {
-    // 定义成员变量并指定类型
     service: AxiosInstance;
-    public constructor(config: AxiosRequestConfig, user: any) {
-
-        // 实例化axios
+    public constructor() {
+        //获取公共配置
+        const runtimeConfig = useRuntimeConfig();
+        const config = <AxiosRequestConfig>{
+            baseURL: runtimeConfig.public.baseApi,
+            timeout: RequestEnums.TIMEOUT as number,
+        }
         this.service = axios.create(config);
 
         /**
          * 请求拦截器
-         * 客户端发送请求 -> [请求拦截器] -> 服务器
-         * token校验(JWT) : 接受服务器返回的token,存储到vuex/pinia/本地储存当中
          */
         this.service.interceptors.request.use(
             (config: AxiosRequestConfig) => {
-                const token = user.userInfoData.token || '';
+                console.log(123123)
+                const userInfo = useUserStore()
+                const token = userInfo.userInfoData.token || '';
                 return {
                     ...config,
                     headers: {
-                        'token': token, // 请求头中携带token信息
+                        'BeAuthorizationarer': ` ${token}`,
                     }
                 }
             },
@@ -72,11 +62,12 @@ class RequestHttp {
 
         /**
          * 响应拦截器
-         * 服务器换返回信息 -> [拦截统一处理] -> 客户端JS获取到信息
          */
         this.service.interceptors.response.use(
             (response: AxiosResponse) => {
-                const { data, config } = response; // 解构
+                const { data, config } = response;
+                const userInfo = useUserStore();
+                const router = useRouter();
                 if (data.code == RequestEnums.OPERATIONFAIL) {
                     return Promise.reject(data);
                 }
@@ -105,10 +96,6 @@ class RequestHttp {
                         icon: 'error',
                         title: '网络连接失败'
                     })
-                    // 可以跳转到错误页面，也可以不做操作
-                    // return router.replace({
-                    //   path: '/404'
-                    // });
                 }
             }
         )
@@ -145,6 +132,4 @@ class RequestHttp {
         return this.service.delete(url, { params });
     }
 }
-
-// 导出一个实例对象
-export default new RequestHttp(config, userInfo);
+export const useHttp = () => new RequestHttp(); 

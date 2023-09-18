@@ -4,7 +4,8 @@ package handler
 import (
 	"net/http"
 
-	userslogin "translation/api/internal/handler/users/login"
+	userinfo "translation/api/internal/handler/user/info"
+	userlogin "translation/api/internal/handler/user/login"
 	"translation/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -16,14 +17,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/login",
-				Handler: userslogin.UserLoginHandler(serverCtx),
+				Handler: userlogin.UserLoginHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/register",
-				Handler: userslogin.UserRegisterHandler(serverCtx),
+				Handler: userlogin.UserRegisterHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/users"),
+		rest.WithPrefix("/user"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/getUserInfo",
+				Handler: userinfo.UserInfoHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/user"),
 	)
 }

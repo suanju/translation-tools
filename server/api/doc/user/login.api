@@ -26,11 +26,11 @@ type (
 )
 
 @server(
-	group: users/login
-	prefix: /users
+	group: user/login
+	prefix: /user
 )
 
-service  userLogin {
+service  api {
 	@handler UserLogin
 	post /login (userLoginReq) returns (userLoinResp)
 	
