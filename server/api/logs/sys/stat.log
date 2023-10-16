@@ -5729,3 +5729,5 @@
 {"@timestamp":"2023-10-16T18:31:03.684+08:00","caller":"load/sheddingstat.go:61","content":"(api) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0","level":"stat"}
 {"@timestamp":"2023-10-16T18:32:03.631+08:00","caller":"stat/usage.go:61","content":"CPU: 0m, MEMORY: Alloc=4.7Mi, TotalAlloc=32.5Mi, Sys=20.2Mi, NumGC=263","level":"stat"}
 {"@timestamp":"2023-10-16T18:32:03.684+08:00","caller":"load/sheddingstat.go:61","content":"(api) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0","level":"stat"}
+{"@timestamp":"2023-10-16T18:33:03.630+08:00","caller":"stat/usage.go:61","content":"CPU: 0m, MEMORY: Alloc=4.7Mi, TotalAlloc=32.5Mi, Sys=20.2Mi, NumGC=263","level":"stat"}
+{"@timestamp":"2023-10-16T18:33:03.683+08:00","caller":"load/sheddingstat.go:61","content":"(api) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0","level":"stat"}

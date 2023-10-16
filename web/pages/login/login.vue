@@ -97,7 +97,6 @@ const form = reactive<LoginForm>({
   password: "", 
 });
 
-<<<<<<< HEAD
 const submit = async () => {
   try {
     isLoading.value = true;
@@ -155,10 +154,3 @@ const importClass = [
   return acc;
 }, {} as Record<string, boolean>);
 </script>
-=======
-<script setup>
-const router = useRouter()
-
-
-</script>
->>>>>>> bf70a4241f55b397fd46fd414aae75dadfd2966e

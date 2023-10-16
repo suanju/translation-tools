@@ -1,11 +1,21 @@
+/*
+ * @Author: your name
+ * @Date: 2023-09-14 10:53:33
+ * @LastEditTime: 2023-10-16 18:55:12
+ * @LastEditors: your name
+ * @Description:
+ * @FilePath: \server\api\internal\logic\user\login\userregisterlogic.go
+ *
+ */
 package login
 
 import (
 	"context"
-	"google.golang.org/grpc/status"
 	"strconv"
 	"translation/api/internal/utils/errorx"
 	"translation/rpc/user/pb"
+
+	"google.golang.org/grpc/status"
 
 	"translation/api/internal/svc"
 	"translation/api/internal/types"
@@ -44,11 +54,8 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterReq) (resp *type
 		return nil, errorx.NewDefaultErrorMessage("注册失败")
 	}
 	return &types.UserRegisterResp{
-<<<<<<< HEAD
 		Id:    result.UserId,
 		Email: req.Email,
-=======
->>>>>>> bf70a4241f55b397fd46fd414aae75dadfd2966e
 		Token: token,
 	}, nil
 }

@@ -14,7 +14,6 @@
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "autoprefixer": "^10.4.15",
     "nuxt": "^3.7.0",
-<<<<<<< HEAD
     "nuxt-svgo": "^3.5.5",
     "or": "^0.2.0",
     "postcss": "^8.4.29",
@@ -23,13 +22,6 @@
   "dependencies": {
     "@element-plus/nuxt": "^1.0.5",
     "@headlessui/vue": "^1.7.16",
-=======
-    "or": "^0.2.0",
-    "postcss": "^8.4.29"
-  },
-  "dependencies": {
-    "@element-plus/nuxt": "^1.0.5",
->>>>>>> bf70a4241f55b397fd46fd414aae75dadfd2966e
     "@heroicons/vue": "^2.0.18",
     "@nuxt/types": "^2.17.1",
     "@nuxtjs/composition-api": "^0.33.1",
@@ -37,11 +29,8 @@
     "@tailwindcss/forms": "^0.5.6",
     "@types/yup": "^0.32.0",
     "element-plus": "^2.3.12",
-<<<<<<< HEAD
     "monaco-editor": "^0.44.0",
     "monaco-yaml": "^5.1.0",
-=======
->>>>>>> bf70a4241f55b397fd46fd414aae75dadfd2966e
     "pinia": "^2.1.6",
     "sweetalert2": "^11.7.27",
     "typescript": "^5.2.2",
