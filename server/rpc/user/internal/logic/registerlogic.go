@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2023-09-10 19:10:45
- * @LastEditTime: 2023-10-16 18:55:34
+ * @LastEditTime: 2023-10-16 19:11:21
  * @LastEditors: your name
  * @Description: 
  * @FilePath: \server\rpc\user\internal\logic\registerlogic.go

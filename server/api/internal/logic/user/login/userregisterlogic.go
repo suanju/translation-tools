@@ -1,12 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2023-09-14 10:53:33
- * @LastEditTime: 2023-10-16 18:55:12
- * @LastEditors: your name
- * @Description:
- * @FilePath: \server\api\internal\logic\user\login\userregisterlogic.go
- *
- */
 package login
 
 import (
