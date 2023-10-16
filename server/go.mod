@@ -7,7 +7,10 @@ require (
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.15.3
+<<<<<<< HEAD
 	github.com/golang-jwt/jwt/v4 v4.5.0
+=======
+>>>>>>> bf70a4241f55b397fd46fd414aae75dadfd2966e
 	github.com/pkg/errors v0.9.1
 	github.com/zeromicro/go-zero v1.5.5
 	github.com/zeromicro/x v0.0.0-20230424055333-01c7fb9548d4

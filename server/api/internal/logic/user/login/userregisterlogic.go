@@ -44,8 +44,11 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterReq) (resp *type
 		return nil, errorx.NewDefaultErrorMessage("注册失败")
 	}
 	return &types.UserRegisterResp{
+<<<<<<< HEAD
 		Id:    result.UserId,
 		Email: req.Email,
+=======
+>>>>>>> bf70a4241f55b397fd46fd414aae75dadfd2966e
 		Token: token,
 	}, nil
 }

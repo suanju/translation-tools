@@ -44,6 +44,10 @@ class RequestHttp {
          */
         this.service.interceptors.request.use(
             (config: AxiosRequestConfig) => {
+<<<<<<< HEAD
+=======
+                console.log(123123)
+>>>>>>> bf70a4241f55b397fd46fd414aae75dadfd2966e
                 const userInfo = useUserStore()
                 const token = userInfo.userInfoData.token || '';
                 return {
