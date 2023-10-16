@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	translationlang "translation/api/internal/handler/translation/lang"
 	userinfo "translation/api/internal/handler/user/info"
 	userlogin "translation/api/internal/handler/user/login"
 	"translation/api/internal/svc"
@@ -32,11 +33,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/getUserInfo",
+				Path:    "/get_user_info",
 				Handler: userinfo.UserInfoHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/user"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/get_lang_list",
+				Handler: translationlang.GetLangListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/translation"),
 	)
 }

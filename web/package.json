@@ -6,7 +6,7 @@
     "dev": "nuxt dev  --dotenv .env.development",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare" 
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -28,8 +28,10 @@
     "@pinia/nuxt": "^0.4.11",
     "@tailwindcss/forms": "^0.5.6",
     "@types/yup": "^0.32.0",
+    "axios": "^1.5.1",
     "element-plus": "^2.3.12",
     "monaco-editor": "^0.44.0",
+    "monaco-themes": "^0.4.4",
     "monaco-yaml": "^5.1.0",
     "pinia": "^2.1.6",
     "sweetalert2": "^11.7.27",

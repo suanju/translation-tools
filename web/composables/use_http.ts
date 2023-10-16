@@ -1,4 +1,5 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import Swal from 'sweetalert2'
 import { useUserStore } from '~/store/user';
 
@@ -43,7 +44,7 @@ class RequestHttp {
          * 请求拦截器
          */
         this.service.interceptors.request.use(
-            (config: AxiosRequestConfig) => {
+            (config : any) => {
                 const userInfo = useUserStore()
                 const token = userInfo.userInfoData.token || '';
                 return {
@@ -64,7 +65,7 @@ class RequestHttp {
          */
         this.service.interceptors.response.use(
             (response: AxiosResponse) => {
-                const { data, config } = response;
+                const { data } = response;
                 const userInfo = useUserStore();
                 const router = useRouter();
                 if (data.code == RequestEnums.OPERATIONFAIL) {

@@ -106,15 +106,15 @@
 </template>
 
 <script lang="ts" setup>
-import { RegisetrForm } from "~/types/pages/login/register";
+import type { RegisetrForm } from "~/types/pages/login/register";
 import { Field, Form, ErrorMessage } from "vee-validate";
 import { ExclamationCircleIcon } from "@heroicons/vue/20/solid";
 import { httpRegiste } from "~/apis/user";
-import { HttpRegisterReq } from "~/types/apis/user";
+import type { HttpRegisterReq } from "~/types/apis/user";
 import * as yup from "yup";
 import Swal from "sweetalert2";
 import { useUserStore } from "~/store/user";
-import { UserInfo } from "~/types/store/users";
+import  type { UserInfo } from "~/types/store/users";
 import LoadingIcon from "~/assets/icons/loading.svg"
 
 const router = useRouter();

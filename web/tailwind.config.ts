@@ -9,8 +9,13 @@ module.exports = {
     "./app.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "dark-primary": '#0D0D0D', 
+      },
+    },
   },
+  darkMode: "class",
   plugins: [
     require('@tailwindcss/forms')
   ],

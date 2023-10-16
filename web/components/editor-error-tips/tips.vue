@@ -43,7 +43,7 @@ watch(() => editorInfo.editorError.length, (val) => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .tips-box {
     z-index: 999;
     transition: all 0.1s ease;

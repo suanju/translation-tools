@@ -1,10 +1,10 @@
 
-import { HttpRegisterReq, HttpRegisterResq, HttpLoginReq, HttpLoginResq } from '~/types/apis/user';
+import type { HttpRegisterReq, HttpRegisterResq, HttpLoginReq, HttpLoginResq } from '~/types/apis/user';
 
 
 export const httpLogin = (params: HttpLoginReq) => {
     return useHttp().post<HttpLoginResq>('/user/login', params);
 }
 export const httpRegiste = (params: HttpRegisterReq) => {
-    return useHttp().post<HttpRegisterResq>('/user/login', params);
+    return useHttp().post<HttpRegisterResq>('/user/register', params);
 }

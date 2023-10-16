@@ -30,3 +30,18 @@ type UserInfoReq struct {
 type UserInfoResp struct {
 	Email string `json:"email"`
 }
+
+type GetLangListReq struct {
+}
+
+type LangData struct {
+	Id       int64  `json:"id"`
+	Lang     string `json:"lang"`
+	Code     string `json:"code"`
+	Original bool   `json:"original"`
+	Results  bool   `json:"results"`
+}
+
+type GetLangListResp struct {
+	LangList []LangData `json:"lang_list"`
+}

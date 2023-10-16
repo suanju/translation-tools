@@ -5,3 +5,4 @@ info(
 )
 import  "user/login.api"
 import  "user/info.api"
+import  "translation/lang.api"
