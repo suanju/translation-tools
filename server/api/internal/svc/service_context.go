@@ -10,20 +10,23 @@ import (
 	"reflect"
 	"translation/api/internal/config"
 	"translation/api/internal/utils/jwt"
-	"translation/rpc/user/userservice"
+	translationService "translation/rpc/translation/userservice"
+	userService "translation/rpc/user/userservice"
 )
 
 type ServiceContext struct {
-	Config      config.Config
-	AuthService *jwt.AuthService
-	UserService userservice.UserService
+	Config             config.Config
+	AuthService        *jwt.AuthService
+	UserService        userService.UserService
+	TranslationService translationService.UserService
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
-		Config:      c,
-		AuthService: jwt.NewAuthService(c.Auth.AccessSecret, c.Auth.AccessExpire),
-		UserService: userservice.NewUserService(zrpc.MustNewClient(c.User)),
+		Config:             c,
+		AuthService:        jwt.NewAuthService(c.Auth.AccessSecret, c.Auth.AccessExpire),
+		UserService:        userService.NewUserService(zrpc.MustNewClient(c.User)),
+		TranslationService: translationService.NewUserService(zrpc.MustNewClient(c.Translation)),
 	}
 }
 

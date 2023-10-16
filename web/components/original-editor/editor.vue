@@ -80,7 +80,7 @@
       </div>
 
       <button type="button"
-        className=" w-32 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        class=" w-32 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
         上传文件
       </button>
     </div>
@@ -92,7 +92,7 @@
 <script lang="ts" setup>
 import * as monaco from "monaco-editor";
 import 'monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution';
-import {initMonacoWorker , getYamlITextModel} from "~/utlis/monaco_worker";
+
 import {
   Listbox,
   ListboxButton,
@@ -101,6 +101,7 @@ import {
 } from "@headlessui/vue";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
 import { useEditorStore } from "~/store/editor"
+import { useGlobalStore } from "~/store/global";
 
 const codeEditorRef = ref(null);
 const editorInfo = useEditorStore()
@@ -118,21 +119,21 @@ const formatArr = [
 
 const langSelected = ref(langArr[0]);
 const formatSelected = ref(formatArr[0]);
+const globalInfo = useGlobalStore()
 
 let monacoEditor: monaco.editor.IStandaloneCodeEditor
 
-watch(formatSelected , (val) =>{
+watch(formatSelected, (val) => {
   monaco.editor.setModelLanguage(monacoEditor.getModel(), val.language);
 })
 
 
 onMounted(() => {
-  //开启语法提示worker
-  initMonacoWorker();
-  getYamlITextModel();
+  //加载主题
+  const theme = globalInfo.theme == "light" ? "vs" : "brilliance-black"
   codeEditorRef.value.style.height = "calc(100vh - 64px - 5rem - 4.2rem)";
   monacoEditor = monaco.editor.create(codeEditorRef.value as HTMLElement, {
-    theme: "vs", // 主题
+    theme, // 主题
     value: "{{'得到' ：  ，， '$schema':  1} 12}", // 默认显示的值
     language: "json",
     folding: true, // 是否折叠

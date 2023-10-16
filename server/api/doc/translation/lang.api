@@ -1,0 +1,32 @@
+syntax = "v1"
+
+info(
+    desc: "翻译相关"
+)
+
+type (
+    GetLangListReq {
+
+    }
+
+    LangData {
+        Id int64    `json:"id"`
+        Lang string `json:"lang"`
+        Code string `json:"code"`
+        Original bool `json:"original"`
+        Results bool `json:"results"`
+    }
+    GetLangListResp {
+        LangList []LangData `json:"lang_list"`
+    }
+)
+
+@server(
+    group: translation/lang
+    prefix: /translation
+)
+
+service  api {
+    @handler GetLangList
+    get /get_lang_list (GetLangListReq) returns (GetLangListResp)
+}

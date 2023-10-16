@@ -13,8 +13,6 @@ message UserLoginReq {
 message UserLoginResp {
   int64 user_id = 1;
 }
-
-
 message UserRegisterReq {
   string email = 1;
   string password = 2;

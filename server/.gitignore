@@ -1,1 +1,3 @@
-./api/logs
+/api/logs
+.vscode
+.idea

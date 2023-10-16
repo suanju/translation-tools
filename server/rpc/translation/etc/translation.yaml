@@ -1,0 +1,8 @@
+Name: translation.rpc
+ListenOn: 0.0.0.0:10002
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: translation.rpc
+Mysql:
+  DataSource: root:123456@tcp(localhost:3306)/translation?charset=utf8mb4&parseTime=True&loc=Local

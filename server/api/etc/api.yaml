@@ -15,3 +15,8 @@ User:
     Hosts:
       - localhost:2379
     Key: user.rpc
+Translation:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: translation.rpc

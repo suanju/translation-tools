@@ -12,5 +12,6 @@ type Config struct {
 		AccessExpire int64
 	}
 	//rpc服务相关
-	User zrpc.RpcClientConf
+	User        zrpc.RpcClientConf
+	Translation zrpc.RpcClientConf
 }
