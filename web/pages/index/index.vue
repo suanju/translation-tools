@@ -1,6 +1,6 @@
 <template>
   <ClientOnly >
-    <div class="main border rounded-2xl">
+    <div class="main border rounded-2xl dark:border-dark-border-primary">
       <div class="flex">
         <div class="w-1/2">
           <OriginalEditot v-if="monacoReady"></OriginalEditot>
@@ -37,7 +37,8 @@ onNuxtReady(async () => {
   const monaco = (await import ("monaco-editor"));
   console.log(monaco)
   //加载主题
-  const theme = (await import('monaco-themes/themes/Brilliance Black.json')).default
+  // const theme = (await import('monaco-themes/themes/Twilight.json')).default
+  const theme = (await import('~/assets/monaco/themes/dark.json')).default
   // @ts-ignore 版本问题无法取出相关类型
   monaco.editor.defineTheme('brilliance-black', theme);
   //开启语法提示worker

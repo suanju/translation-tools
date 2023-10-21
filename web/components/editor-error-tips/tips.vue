@@ -5,10 +5,10 @@
             <TipsIcon class="text-white w-6 h-6" :fontControlled="false"
                 @click="editorInfo.editorTipsShow = !editorInfo.editorTipsShow" />
         </div>
-        <div class="tips-error-box max-w-xl h-full bg-white  shadow-md border-l-2"
+        <div class="tips-error-box max-w-xl h-full bg-white dark:bg-dark-bg-primary shadow-md border-l dark:border-dark-border-primary"
             :style="{ 'width': editorInfo.editorTipsShow ? '20em' : '0em' }">
             <div class="flex items-center justify-center">
-                <h4 class="text-3xl font-normal p-8 border-b-2 w-4/5 text-center whitespace-pre">语法错误</h4>
+                <h4 class="text-3xl font-normal p-8 border-b-2 w-4/5 text-center whitespace-pre dark:text-white dark:border-dark-border-primary">语法错误</h4>
             </div>
             <!-- 无错误 -->
             <div class="mt-16 mx-10" v-show="!editorInfo.editorError.length">
@@ -20,9 +20,9 @@
             <!-- 错误列表 -->
             <div class="mt-10 mx-10 " v-show="editorInfo.editorError.length">
                 <div v-for="(item, index) in editorInfo.editorError" :key="index"
-                    class="flex pl-4 justify-center flex-col border-l-4 border-l-red-600 w-60 h-24 min-h-full bg-gray-100 rounded-r-lg mb-8">
+                    class="flex pl-4 justify-center flex-col border-l-4 border-l-red-600 w-60 h-24 min-h-full bg-gray-100 dark:bg-dark-bg-darkgray rounded-r-lg mb-8">
                     <div class="text-indigo-400">Line : {{ item.startLineNumber }} Column : {{ item.startColumn }}</div>
-                    <div class=""> {{ item.message }}</div>
+                    <div class="dark:text-white"> {{ item.message }}</div>
                 </div>
             </div>
         </div>

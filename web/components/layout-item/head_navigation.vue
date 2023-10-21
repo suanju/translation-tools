@@ -1,7 +1,7 @@
 <template>
-    <div class="sticky top-0 z-40 lg:mx-auto lg:max-w-9xl lg:px-8 bg-slate-50 dark:bg-current">
+    <div class="sticky top-0 z-40 lg:mx-auto lg:max-w-9xl lg:px-8 bg-slate-50 dark:bg-dark-bg-primary">
         <div
-            class="flex h-16 items-center gap-x-4 border-b border-gray-200 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none bg-slate-50 dark:bg-current">
+            class="flex h-20 items-center gap-x-4  border-gray-200 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none bg-slate-50 dark:bg-dark-bg-primary">
             <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" @click="globalInfo.sidebarShow = true">
                 <span class="sr-only">Open sidebar</span>
                 <Bars3Icon class="h-6 w-6" aria-hidden="true" />
@@ -12,7 +12,7 @@
 
             <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
                 <div class="relative flex flex-1 items-center">
-                    <span class="font-bold text-2xl font-serif text-indigo-600">开始翻译</span>
+                    <span class="font-bold text-3xl tracking-widest  text-indigo-600">开始翻译</span>
                 </div>
                 <div class="flex items-center gap-x-4 lg:gap-x-6">
                     <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
@@ -21,14 +21,14 @@
                     </button>
                     <div>
                         <span @click="globalInfo.theme = globalInfo.theme == 'dark' ? 'light' : 'dark'"
-                            class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                            class="inline-flex items-center rounded-md bg-gray-50 dark:bg-dark-bg-primary  px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:ring-dark-ring-primary">
                             <DarkIcon v-show="globalInfo.theme === 'dark'" class="w-5 h-5" :fontControlled="false" filled />
                             <LightIcon v-show="globalInfo.theme === 'light'" class="w-5 h-5" :fontControlled="false"
                                 filled />
                         </span>
                     </div>
                     <!-- 分隔符 -->
-                    <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true" />
+                    <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200 dark:bg-dark-ring-primary" aria-hidden="true" />
 
                     <!-- 用户下拉 -->
                     <Menu as="div" class="relative">

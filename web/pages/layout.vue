@@ -22,7 +22,7 @@
                   </button>
                 </div>
               </TransitionChild>
-              <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
+              <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-dark-bg-primary px-6 pb-4">
                 <div class="flex h-16 shrink-0 items-center">
                   <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                     alt="Your Company" />
@@ -34,8 +34,8 @@
                         <li v-for="item in navigation" :key="item.name">
                           <a :href="item.href" :class="[
                             item.current
-                              ? 'bg-gray-50 text-indigo-600'
-                              : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                              ? 'bg-gray-50 dark:bg-dark-bg-grey-violet text-indigo-600'
+                              : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
                             'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                           ]">
                             <component :is="item.icon" :class="[
@@ -66,9 +66,10 @@
     <!-- 侧边栏-->
     <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
       <!-- 侧边栏组件 -->
-      <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
+      <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 dark:border-dark-border-primary bg-white dark:bg-dark-bg-primary px-6 pb-4">
         <div class="flex h-16 shrink-0 items-center">
-          <img class="h-8 w-auto" :src="LogoIcon" alt="Your Company" />
+          <img class="h-8 w-auto" :src="LogoIcon" alt="logo" />
+          <span class="ml-2  text-lg font-medium font-serif dark:text-white"> Mfn Transition</span>
         </div>
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -77,8 +78,8 @@
                 <li v-for="item in navigation" :key="item.name">
                   <a :href="item.href" :class="[
                     item.current
-                      ? 'bg-gray-50 text-indigo-600'
-                      : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                      ? 'bg-gray-50 dark:bg-dark-bg-grey-violet text-indigo-600'
+                      : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                   ]">
                     <component :is="item.icon" :class="[
@@ -100,7 +101,7 @@
     <div class="lg:pl-72">
       <!-- 顶部导航 -->
       <HeadNavigation></HeadNavigation>
-      <main class="main py-10 bg-slate-50 dark:bg-dark-primary">
+      <main class="main pt-8 bg-slate-50 dark:bg-dark-bg-primary">
         <div class="mx-auto max-w-9xl px-4 sm:px-6 lg:px-8">
           <!-- 中心内容 -->
           <NuxtPage />
@@ -118,7 +119,6 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import {
-  BellIcon,
   CalendarIcon,
   Cog6ToothIcon,
   FolderIcon,
@@ -146,6 +146,6 @@ const globalInfo = useGlobalStore()
 
 <style lang="scss" scoped>
 .main {
-  min-height: calc(100vh - 4.2rem);
+  min-height: calc(100vh - 5rem);
 }
 </style>

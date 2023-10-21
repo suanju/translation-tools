@@ -11,7 +11,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "dark-primary": '#0D0D0D', 
+        "dark-bg-primary": '#02050E', 
+        "dark-bg-grey": '#3D4047', 
+        "dark-bg-darkgray": '#10131B',
+        "dark-bg-grey-violet": '#040B21',
+        "dark-bg-mauve-violet": '#080D1D',  
+        "dark-ring-primary": '#4D4F57', 
+        "dark-border-primary": '#4D4F57', 
+        "dark-text-primary": '#4D4F57', 
       },
     },
   },

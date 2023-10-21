@@ -1,7 +1,7 @@
 <template>
   <div class="editor-box rounded">
     <!-- 工具栏 -->
-    <div class="h-16 flex items-center border rounded-rl-2xl px-6 bg-white">
+    <div class="h-16 flex items-center border-b border-l rounded-tr-2xl px-6 bg-white dark:bg-dark-bg-primary dark:border-dark-border-primary ">
       <div class="flex items-center flex-auto">
         <div class="mt-2 flex flex-wrap w-full" ref="containerRef">
           <button type="button" v-for="item in editorInfo.selectedList" :key="item.code"
@@ -77,4 +77,12 @@ onMounted(() => {
 
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+:deep(.monaco-editor) {
+  border-radius: 1rem;
+}
+
+:deep(.monaco-scrollable-element) {
+  border-radius: 1rem;
+}
+</style>
