@@ -6,7 +6,6 @@
                 <span class="sr-only">Open sidebar</span>
                 <Bars3Icon class="h-6 w-6" aria-hidden="true" />
             </button>
-
             <!-- 分隔符 -->
             <div class="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
 
@@ -28,15 +27,16 @@
                         </span>
                     </div>
                     <!-- 分隔符 -->
-                    <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200 dark:bg-dark-ring-primary" aria-hidden="true" />
-
+                    <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200 dark:bg-dark-ring-primary"
+                        aria-hidden="true" />
                     <!-- 用户下拉 -->
                     <Menu as="div" class="relative">
                         <MenuButton class="-m-1.5 flex items-center p-1.5">
                             <span class="sr-only">Open user menu</span>
                             <span class="hidden lg:flex lg:items-center">
                                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
-                                    <UserIcon class="w-8 h-8" :fontControlled="false" filled />
+                                    <UserIcon  v-show="globalInfo.theme === 'light'" class="w-8 h-8" :fontControlled="false" filled />
+                                    <UserDarkIcon v-show="globalInfo.theme === 'dark'" class="w-8 h-8" :fontControlled="false" filled />
                                 </span>
                             </span>
                         </MenuButton>
@@ -46,7 +46,7 @@
                             leave-from-class="transform opacity-100 scale-100"
                             leave-to-class="transform opacity-0 scale-95">
                             <MenuItems
-                                class="absolute right-0 z-10 mt-2.5 w-48 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+                                class="absolute right-0 z-10 mt-2.5 w-48 origin-top-right rounded-md bg-white  dark:bg-dark-bg-moderate-grey py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                                 <!-- 用户下拉选择 -->
                                 <UserMenuInfo />
                             </MenuItems>
@@ -70,6 +70,7 @@ import {
 } from "@heroicons/vue/24/outline";
 
 import UserIcon from "~/assets/icons/user.svg"
+import UserDarkIcon from "~/assets/icons/user-dark.svg"
 import UserMenuInfo from "./user_menu_info.vue"
 import { useGlobalStore } from "~/store/global"
 import LightIcon from "~/assets/icons/light.svg"
@@ -79,8 +80,8 @@ const globalInfo = useGlobalStore()
 
 
 onNuxtReady(async () => {
-    watch(() => globalInfo.theme,  async () => {
-       await globalInfo.updateTheme()
+    watch(() => globalInfo.theme, async () => {
+        await globalInfo.updateTheme()
     }, { immediate: true })
 })
 </script>

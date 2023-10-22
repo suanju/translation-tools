@@ -12,7 +12,8 @@ module.exports = {
     extend: {
       colors: {
         "dark-bg-primary": '#02050E', 
-        "dark-bg-grey": '#3D4047', 
+        "dark-bg-grey": '#3D4047',
+        "dark-bg-moderate-grey": '#2D3037', 
         "dark-bg-darkgray": '#10131B',
         "dark-bg-grey-violet": '#040B21',
         "dark-bg-mauve-violet": '#080D1D',  
@@ -21,6 +22,9 @@ module.exports = {
         "dark-text-primary": '#4D4F57', 
       },
     },
+  },
+  variants: {
+    scrollbar: ['responsive']
   },
   darkMode: "class",
   plugins: [
