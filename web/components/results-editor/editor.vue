@@ -38,11 +38,6 @@ const containerRef = ref(null)
 const editorInfo = useEditorStore()
 const globalInfo = useGlobalStore()
 
-watch(() => editorInfo.selectedList, (_, nlv) => {
-  console.log(containerRef.value.offsetWidth)
-}, {
-  deep: true
-})
 
 
 onMounted(() => {

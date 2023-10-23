@@ -21,8 +21,8 @@
                     <div>
                         <span @click="globalInfo.theme = globalInfo.theme == 'dark' ? 'light' : 'dark'"
                             class="inline-flex items-center rounded-md bg-gray-50 dark:bg-dark-bg-primary  px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:ring-dark-ring-primary">
-                            <DarkIcon v-show="globalInfo.theme === 'dark'" class="w-5 h-5" :fontControlled="false" filled />
-                            <LightIcon v-show="globalInfo.theme === 'light'" class="w-5 h-5" :fontControlled="false"
+                            <DarkIcon v-if="globalInfo.theme === 'dark'" class="w-5 h-5" :fontControlled="false" filled />
+                            <LightIcon v-else class="w-5 h-5" :fontControlled="false"
                                 filled />
                         </span>
                     </div>

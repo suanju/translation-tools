@@ -24,8 +24,8 @@
               </TransitionChild>
               <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-dark-bg-primary px-6 pb-4">
                 <div class="flex h-16 shrink-0 items-center">
-                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Your Company" />
+                  <img class="h-8 w-auto" :src="LogoIcon" alt="logo" />
+                  <span class="ml-2  text-lg font-medium font-serif dark:text-white"> Mfn Transition</span>
                 </div>
                 <nav class="flex flex-1 flex-col">
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -35,13 +35,13 @@
                           <a :href="item.href" :class="[
                             item.current
                               ? 'bg-gray-50 dark:bg-dark-bg-grey-violet text-indigo-600'
-                              : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
+                              : 'text-gray-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
                             'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                           ]">
                             <component :is="item.icon" :class="[
                               item.current
                                 ? 'text-indigo-600'
-                                : 'text-gray-400 group-hover:text-indigo-600',
+                                : 'text-gray-400  group-hover:text-indigo-600',
                               'h-6 w-6 shrink-0',
                             ]" aria-hidden="true" />
                             {{ item.name }}
@@ -66,7 +66,8 @@
     <!-- 侧边栏-->
     <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
       <!-- 侧边栏组件 -->
-      <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 dark:border-dark-border-primary bg-white dark:bg-dark-bg-primary px-6 pb-4">
+      <div
+        class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 dark:border-dark-border-primary bg-white dark:bg-dark-bg-primary px-6 pb-4">
         <div class="flex h-16 shrink-0 items-center">
           <img class="h-8 w-auto" :src="LogoIcon" alt="logo" />
           <span class="ml-2  text-lg font-medium font-serif dark:text-white"> Mfn Transition</span>
@@ -79,8 +80,8 @@
                   <a :href="item.href" :class="[
                     item.current
                       ? 'bg-gray-50 dark:bg-dark-bg-grey-violet text-indigo-600'
-                      : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
-                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+                      : 'text-gray-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
+                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold h-16 items-center',
                   ]">
                     <component :is="item.icon" :class="[
                       item.current

@@ -79,9 +79,9 @@
         </Listbox>
       </div>
 
-      <button type="button"
+      <button type="button" @click="uploadFile"
         class=" w-32 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-        上传文件
+        选择文件
       </button>
     </div>
     <!-- 代码编辑器 -->
@@ -121,12 +121,38 @@ const langSelected = ref(langArr[0]);
 const formatSelected = ref(formatArr[0]);
 const globalInfo = useGlobalStore()
 
+
+const pickerOpts = {
+  types: [
+    {
+      description: "json",
+      accept: {
+        "josn/*": [".json"],
+        "yaml/*": [".yaml"],
+      },
+    },
+  ],
+  multiple: false,
+};
+
+const uploadFile = async () => {
+  //@ts-ignore
+  const [fileHandle] = await window.showOpenFilePicker(pickerOpts)
+  const file = await fileHandle.getFile()
+  const redaer = new FileReader()
+  redaer.onload = (e) =>{
+    const jsonText = e.target.result as string
+    monacoEditor.setValue(jsonText)
+  }
+  redaer.readAsText(file)
+  console.log(file)
+}
+
 let monacoEditor: monaco.editor.IStandaloneCodeEditor
 
 watch(formatSelected, (val) => {
   monaco.editor.setModelLanguage(monacoEditor.getModel(), val.language);
 })
-
 
 onMounted(() => {
   //加载主题
