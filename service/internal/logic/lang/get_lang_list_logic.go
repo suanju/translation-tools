@@ -1,4 +1,4 @@
-package translation
+package lang
 
 import (
 	"context"
@@ -24,7 +24,20 @@ func NewGetLangListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetLa
 }
 
 func (l *GetLangListLogic) GetLangList(req *types.GetLangListReq) (resp *types.GetLangListResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	resp = &types.GetLangListResp{
+		LangList: make([]types.LangData, 0),
+	}
+	for k, v := range l.svcCtx.LangInfo.LangList {
+		for kk, vv := range v {
+			if kk == req.Platform {
+				resp.LangList = append(resp.LangList, types.LangData{
+					Lang:     k,
+					Code:     vv.Code,
+					Original: vv.Original,
+					Results:  vv.Results,
+				})
+			}
+		}
+	}
+	return resp, err
 }

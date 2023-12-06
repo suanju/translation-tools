@@ -2,13 +2,27 @@
 package types
 
 type GetLangListReq struct {
+	Platform string `json:"platform"`
 }
 
 type LangData struct {
-	Lang string `json:"lang"`
-	Code string `json:"code"`
+	Lang     string `json:"lang"`
+	Code     string `json:"code"`
+	Original bool   `json:"original"`
+	Results  bool   `json:"results"`
 }
 
 type GetLangListResp struct {
 	LangList []LangData `json:"lang_list"`
+}
+
+type PlatformData struct {
+	Lang     string `json:"lang"`
+	Code     string `json:"code"`
+	Original bool   `json:"original"`
+	Results  bool   `json:"results"`
+}
+
+type GetPlatformListResp struct {
+	LangList []PlatformData `json:"platform_list"`
 }

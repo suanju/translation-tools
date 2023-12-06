@@ -11,18 +11,13 @@ export default <RouterConfig>{
                     name:"translation",
                     path :"",
                     component: () => import('~/pages/index/index.vue'),
+                },
+                {
+                    name: 'setting',
+                    path: '/setting',
+                    component: () => import('~/pages/setting/setting.vue')
                 }
             ]
-        },
-        {
-            name: 'login',
-            path: '/login',
-            component: () => import('~/pages/login/login.vue')
-        },
-        {
-            name: 'register',
-            path: '/register',
-            component: () => import('~/pages/login/register.vue')
         }
     ],
 }

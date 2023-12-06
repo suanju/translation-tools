@@ -1,4 +1,4 @@
-package translation
+package lang
 
 import (
 	"net/http"
@@ -7,7 +7,7 @@ import (
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 	zeroMicroHttp "github.com/zeromicro/x/http"
-	"translation/internal/logic/translation"
+	"translation/internal/logic/lang"
 	"translation/internal/svc"
 	"translation/internal/types"
 )
@@ -24,7 +24,7 @@ func GetLangListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := translation.NewGetLangListLogic(r.Context(), svcCtx)
+		l := lang.NewGetLangListLogic(r.Context(), svcCtx)
 		resp, err := l.GetLangList(&req)
 		if err != nil {
 			zeroMicroHttp.JsonBaseResponseCtx(r.Context(), w, err)

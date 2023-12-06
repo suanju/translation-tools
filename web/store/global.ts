@@ -4,7 +4,7 @@ import type { SidebarShow, Theme } from '~/types/store/global'
 export const useGlobalStore = defineStore("global", () => {
     let sidebarShow = ref<SidebarShow>(false)
     let theme = ref<Theme>("light")
-
+    let settingShow = ref(false)
 
     const updateTheme = async () => {
         const monaco = (await import("monaco-editor"));
@@ -21,8 +21,11 @@ export const useGlobalStore = defineStore("global", () => {
     return {
         sidebarShow,
         theme,
+        settingShow,
         updateTheme
     }
 }, {
-    persist: true,
+    persist: {
+        paths: ['sidebarShow','theme']
+    },
 })

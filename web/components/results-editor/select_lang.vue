@@ -87,7 +87,6 @@
 <script lang="ts" setup>
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
-import { array } from 'yup';
 import { useEditorStore } from "~/store/editor"
 
 const editorInfo = useEditorStore()

@@ -10,13 +10,30 @@ import (
 	"translation/internal/config"
 )
 
-type ServiceContext struct {
-	Config config.Config
+type TypeList []struct {
+	Name      string `json:"name"`
+	Code      string `json:"code"`
+	IsDefault bool   `json:"default"`
+}
+type LangList map[string]map[string]struct {
+	Code     string `json:"code"`
+	Original bool   `json:"original"`
+	Results  bool   `json:"results"`
+}
+type LangInfo struct {
+	TypeList `json:"type"`
+	LangList `json:"lang_list"`
 }
 
-func NewServiceContext(c config.Config) *ServiceContext {
+type ServiceContext struct {
+	Config config.Config
+	LangInfo
+}
+
+func NewServiceContext(c config.Config, list LangInfo) *ServiceContext {
 	return &ServiceContext{
-		Config: c,
+		Config:   c,
+		LangInfo: list,
 	}
 }
 

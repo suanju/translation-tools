@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	translation "translation/internal/handler/translation"
+	lang "translation/internal/handler/lang"
 	"translation/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -16,9 +16,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodGet,
 				Path:    "/get_lang_list",
-				Handler: translation.GetLangListHandler(serverCtx),
+				Handler: lang.GetLangListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/get_platform_list",
+				Handler: lang.GetPlatformListHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/translation"),
+		rest.WithPrefix("/lang"),
 	)
 }

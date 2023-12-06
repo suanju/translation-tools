@@ -32,7 +32,7 @@
                     <li>
                       <ul role="list" class="-mx-2 space-y-1">
                         <li v-for="item in navigation" :key="item.name">
-                          <a :href="item.href" :class="[
+                          <span  :class="[
                             item.current
                               ? 'bg-gray-50 dark:bg-dark-bg-grey-violet text-indigo-600'
                               : 'text-gray-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
@@ -45,7 +45,7 @@
                               'h-6 w-6 shrink-0',
                             ]" aria-hidden="true" />
                             {{ item.name }}
-                          </a>
+                          </span>
                         </li>
                       </ul>
                     </li>
@@ -76,8 +76,8 @@
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
             <li>
               <ul role="list" class="-mx-2 space-y-1">
-                <li v-for="item in navigation" :key="item.name">
-                  <a :href="item.href" :class="[
+                <li v-for="item in navigation" :key="item.name" @click="jumpMenu(item)">
+                  <span :class="[
                     item.current
                       ? 'bg-gray-50 dark:bg-dark-bg-grey-violet text-indigo-600'
                       : 'text-gray-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
@@ -90,7 +90,7 @@
                       'h-6 w-6 shrink-0',
                     ]" aria-hidden="true" />
                     {{ item.name }}
-                  </a>
+                  </span>
                 </li>
               </ul>
             </li>
@@ -131,17 +131,22 @@ import LogoIcon from "~/assets/logo/logo.png"
 import { useGlobalStore } from "~/store/global"
 import HeadNavigation from "~/components/layout-item/head_navigation.vue"
 
-
+const router = useRouter();
 
 const navigation = [
-  { name: "开始翻译", href: "#", icon: HomeIcon, current: true },
-  { name: "历史记录", href: "#", icon: UsersIcon, current: false },
-  { name: "立即订阅", href: "#", icon: FolderIcon, current: false },
-  { name: "账户设置", href: "#", icon: Cog6ToothIcon, current: false },
-  { name: "帮助中心", href: "#", icon: CalendarIcon, current: false },
+  { name: "开始翻译", link: "translation", icon: HomeIcon, current: true },
+  { name: "历史记录", link: "#", icon: UsersIcon, current: false },
+  { name: "立即订阅", link: "#", icon: FolderIcon, current: false },
+  { name: "接口设置", link: "setting", icon: Cog6ToothIcon, current: false },
+  { name: "帮助中心", link: "#", icon: CalendarIcon, current: false },
 ];
 
 const globalInfo = useGlobalStore()
+
+const jumpMenu = (item) => {
+  console.log(item)
+  router.push({ name: item.link });
+}
 
 </script>
 

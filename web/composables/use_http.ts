@@ -1,7 +1,6 @@
 import axios from 'axios';
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import Swal from 'sweetalert2'
-import { useUserStore } from '~/store/user';
 
 interface Result {
     code: number;
@@ -44,14 +43,9 @@ class RequestHttp {
          * 请求拦截器
          */
         this.service.interceptors.request.use(
-            (config : any) => {
-                const userInfo = useUserStore()
-                const token = userInfo.userInfoData.token || '';
+            (config: any) => {
                 return {
                     ...config,
-                    headers: {
-                        'BeAuthorizationarer': ` ${token}`,
-                    }
                 }
             },
             (error: AxiosError) => {
@@ -66,17 +60,7 @@ class RequestHttp {
         this.service.interceptors.response.use(
             (response: AxiosResponse) => {
                 const { data } = response;
-                const userInfo = useUserStore();
-                const router = useRouter();
                 if (data.code == RequestEnums.OPERATIONFAIL) {
-                    return Promise.reject(data);
-                }
-                if (data.code === RequestEnums.NOTLOGIN) {
-                    // 登录信息失效，应跳转到登录页面，并清空本地的token
-                    userInfo.userInfoData.token = ""
-                    router.push({
-                        path: '/login'
-                    })
                     return Promise.reject(data);
                 }
                 // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
@@ -87,7 +71,7 @@ class RequestHttp {
                 return data;
             },
             (error: AxiosError) => {
-                if(error.code == "ERR_NETWORK"){
+                if (error.code == "ERR_NETWORK") {
                     return Promise.reject(error)
                 }
                 const { response } = error;
@@ -107,12 +91,6 @@ class RequestHttp {
 
     handleCode(code: number): void {
         switch (code) {
-            case 401:
-                Toast.fire({
-                    icon: 'error',
-                    title: '登录失败，请重新登录'
-                })
-                break;
             default:
                 Toast.fire({
                     icon: 'error',

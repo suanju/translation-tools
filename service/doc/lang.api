@@ -6,24 +6,41 @@ info(
 
 type (
     GetLangListReq {
-
+        platform string `json:"platform"`
     }
 
     LangData {
         Lang string `json:"lang"`
         Code string `json:"code"`
+        Original bool `json:"original"`
+        Results bool `json:"results"`
     }
+
     GetLangListResp {
         LangList []LangData `json:"lang_list"`
+    }
+
+    PlatformData {
+        Lang string `json:"lang"`
+        Code string `json:"code"`
+        Original bool `json:"original"`
+        Results bool `json:"results"`
+    }
+
+    GetPlatformListResp {
+        LangList []PlatformData `json:"platform_list"`
     }
 )
 
 @server(
-    group: translation
-    prefix: /translation
+    group: lang
+    prefix: /lang
 )
 
 service  api {
     @handler GetLangList
     get /get_lang_list (GetLangListReq) returns (GetLangListResp)
+
+    @handler GetPlatformList
+    get /get_platform_list () returns (GetPlatformListResp)
 }
