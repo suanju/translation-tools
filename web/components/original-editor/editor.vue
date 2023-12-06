@@ -196,6 +196,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+
 :deep(.monaco-editor){
   border-radius: 1rem;
 }

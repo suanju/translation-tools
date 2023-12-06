@@ -4,7 +4,7 @@
       <div class="flex">
       <!-- 切换按钮 -->
       <div class="w-24 h-24 bg-indigo-600 z-50 absolute rounded-full flex items-center justify-center" style="left:calc(50% + 5.2rem); top:56%">
-        <switchIcon  class="w-12 h-12 text-white" :fontControlled="false" ></switchIcon>
+        <switchIcon  class="w-12 h-12 text-white" :fontControlled="false"  filled></switchIcon>
       </div>
         <div class="w-1/2">
           <OriginalEditot v-if="monacoReady"></OriginalEditot>

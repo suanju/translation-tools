@@ -1,8 +1,0 @@
-info(
-	desc: "translation-tools"
-	author: "橡皮擦"
-	email: "2506152074@qq,com"
-)
-import  "user/login.api"
-import  "user/info.api"
-import  "translation/lang.api"

@@ -35,8 +35,8 @@
                             <span class="sr-only">Open user menu</span>
                             <span class="hidden lg:flex lg:items-center">
                                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
-                                    <UserIcon  v-show="globalInfo.theme === 'light'" class="w-8 h-8" :fontControlled="false" filled />
-                                    <UserDarkIcon v-show="globalInfo.theme === 'dark'" class="w-8 h-8" :fontControlled="false" filled />
+                                    <UserDarkIcon  v-if="globalInfo.theme === 'dark'" class="w-8 h-8" :fontControlled="false" filled />
+                                    <UserIcon  v-else class="w-8 h-8" :fontControlled="false" filled />
                                 </span>
                             </span>
                         </MenuButton>

@@ -36,7 +36,7 @@
                             item.current
                               ? 'bg-gray-50 dark:bg-dark-bg-grey-violet text-indigo-600'
                               : 'text-gray-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+                            'group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold',
                           ]">
                             <component :is="item.icon" :class="[
                               item.current
@@ -81,7 +81,7 @@
                     item.current
                       ? 'bg-gray-50 dark:bg-dark-bg-grey-violet text-indigo-600'
                       : 'text-gray-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-dark-bg-mauve-violet',
-                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold h-16 items-center',
+                    'group flex gap-x-3 rounded-md p-3 text-base leading-6 font-semibold h-16 items-center',
                   ]">
                     <component :is="item.icon" :class="[
                       item.current
