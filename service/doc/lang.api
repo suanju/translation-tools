@@ -1,12 +1,12 @@
 syntax = "v1"
 
 info(
-    desc: "翻译相关"
+    desc: "语言相关"
 )
 
 type (
     GetLangListReq {
-        platform string `json:"platform"`
+        platform string `form:"platform"`
     }
 
     LangData {
@@ -21,14 +21,13 @@ type (
     }
 
     PlatformData {
-        Lang string `json:"lang"`
+        name string `json:"name"`
         Code string `json:"code"`
-        Original bool `json:"original"`
-        Results bool `json:"results"`
+        Default bool `json:"default"`
     }
 
     GetPlatformListResp {
-        LangList []PlatformData `json:"platform_list"`
+        Platformist []PlatformData `json:"platform_list"`
     }
 )
 
@@ -37,7 +36,7 @@ type (
     prefix: /lang
 )
 
-service  api {
+service api {
     @handler GetLangList
     get /get_lang_list (GetLangListReq) returns (GetLangListResp)
 

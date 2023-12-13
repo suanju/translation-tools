@@ -1,3 +1,9 @@
 Name: api
 Host: 0.0.0.0
 Port: 8888
+log:
+  level: info
+  mode: file
+  timeFormat: 2006-1-2 15:04:05
+  logRotateSize: 50
+  logRotateDays: 7

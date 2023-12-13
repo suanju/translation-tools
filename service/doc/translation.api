@@ -1,9 +1,29 @@
 syntax = "v1"
 
 info(
-    title: "type title here"
-    desc: "type desc here"
-    author: "type author here"
-    email: "type email here"
-    version: "type version here"
+    desc: "翻译相关"
 )
+
+type (
+    TranslationJsonReq {
+        IsKeyAsTr bool `json:"isKeyAsTr"`
+        Original string `json:"original"`
+        Results string `json:"results"`
+        Json map[string]string `json:"json"`
+    }
+
+    TranslationJsonResp {
+        Json  map[string]string `json:"json"`
+    }
+)
+
+@server(
+    group: translation
+    prefix: /translation
+    middleware: TranslationMiddleware
+)
+
+service api {
+    @handler JsonTranslation
+    post /translation_json (TranslationJsonReq) returns (TranslationJsonResp)
+}

@@ -4,10 +4,12 @@ export default defineNuxtConfig({
     strict: true
   },
   css: ['~/assets/css/main.scss'],
+  plugins: [
+    '~/plugins/toast',
+  ],
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
-    '@element-plus/nuxt',
     '@nuxtjs/tailwindcss',
     "@tailwindcss/forms",
     'nuxt-svgo'
@@ -29,6 +31,9 @@ export default defineNuxtConfig({
     storage: 'localStorage'
   },
   vite: {
+    optimizeDeps: {
+      include: ['vue-ripple-directive'],
+    },
     css: {
         scss: {
           additionalData: '@use "@/assets/css/variables.scss" as *;'

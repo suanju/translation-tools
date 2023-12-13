@@ -15,7 +15,7 @@ import (
 func GetLangListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.GetLangListReq
-		if err := httpx.Parse(r, &req); err != nil {
+		if err := httpx.ParseForm(r, &req); err != nil {
 			zeroMicroHttp.JsonBaseResponseCtx(r.Context(), w, errorx.NewCodeError(results.CodeTypeError, err))
 			return
 		}

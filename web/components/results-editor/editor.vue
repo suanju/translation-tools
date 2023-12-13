@@ -4,15 +4,15 @@
     <div class="h-16 flex items-center border-b border-l rounded-tr-2xl px-6 bg-white dark:bg-dark-bg-primary dark:border-dark-border-primary ">
       <div class="flex items-center flex-auto">
         <div class="mt-2 flex flex-wrap w-full" ref="containerRef">
-          <button type="button" v-for="item in editorInfo.selectedList" :key="item.code"
-            @click="editorInfo.uncheckById(item.id)"
+          <button type="button" v-for="item in translationStore.selectedList" :key="item.code"
+            @click="translationStore.uncheckById(item.id)"
             class="flex justify-center  rounded bg-inherit px-2 py-1 text-xs font-semibold text-slate-500 shadow-sm hover:bg-indigo-100 mr-2 mt-1 w-14">
             <span class="flex-1">{{ item.code }}</span>
             <XMarkIcon class="ml-3 w-3 h-4 text-xs" />
           </button>
         </div>
       </div>
-      <button type="button" @click="editorInfo.resultsSelectLangDialogShow = true"
+      <button type="button" @click="translationStore.resultsSelectLangDialogShow = true"
         class=" w-32 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
         选择语言
       </button>
@@ -29,22 +29,22 @@ import * as monaco from "monaco-editor";
 import 'monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution';
 import SelectLang from "./select_lang.vue";
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import { useEditorStore } from "~/store/editor"
 import { useGlobalStore } from "~/store/global";
-
+import { useTranslationStore } from "~/store/translation";
+import { setResultsMonacoEditor} from "~/store/editor"
 
 const codeEditorRef = ref(null);
 const containerRef = ref(null)
-const editorInfo = useEditorStore()
-const globalInfo = useGlobalStore()
+const translationStore = useTranslationStore()
+const globalStore = useGlobalStore()
 
 
 
 onMounted(() => {
   //加载主题
-  const theme = globalInfo.theme == "light" ? "vs" : "brilliance-black"
+  const theme = globalStore.theme == "light" ? "vs" : "brilliance-black"
   codeEditorRef.value.style.height = "calc(100vh - 64px - 5rem - 4.2rem)";
-  monaco.editor.create(codeEditorRef.value as HTMLElement, {
+  let resultsExample = monaco.editor.create(codeEditorRef.value as HTMLElement, {
     theme, // 主题
     value: "", // 默认显示的值
     language: "json",
@@ -65,7 +65,7 @@ onMounted(() => {
     readOnly: false, //是否只读  取值 true | false
     cursorSmoothCaretAnimation: "on", // 是否启用光标平滑插入动画  当你在快速输入文字的时候 光标是直接平滑的移动还是直接"闪现"到当前文字所处位置
   });
-
+  setResultsMonacoEditor(resultsExample)
 
 });
 
@@ -76,8 +76,8 @@ onMounted(() => {
 :deep(.monaco-editor) {
   border-radius: 1rem;
 }
-
-:deep(.monaco-scrollable-element) {
+:deep(.overflow-guard){
   border-radius: 1rem;
 }
+
 </style>

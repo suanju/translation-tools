@@ -3,121 +3,133 @@
     {
       "name": "百度翻译",
       "code": "baidu",
-      "default" : true
+      "default": true
     },
     {
       "name": "谷歌翻译",
       "code": "google",
-      "Default" : false
+      "Default": false
     }
   ],
-  "lang_list":{
-    "中国 (ZH)":{
-      "baidu":{
-        "code":"zh",
-        "original" : true,
-        "results" : true
+  "lang_list": {
+    "自动选择 (AUTO)":{
+      "baidu": {
+        "code": "auto",
+        "original": true,
+        "results": false
       },
-      "google":{
-        "code":"zh",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "auto",
+        "original": true,
+        "results": false
       }
     },
-    "英语 (EN)":{
-      "baidu":{
-        "code":"en",
-        "original" : true,
-        "results" : true
+    "中国 (ZH)": {
+      "baidu": {
+        "code": "zh",
+        "original": true,
+        "results": true
       },
-      "google":{
-        "code":"en",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "zh",
+        "original": true,
+        "results": true
       }
     },
-    "丹麦 (DA)":{
-      "baidu":{
-        "code":"da",
-        "original" : true,
-        "results" : true
+    "英语 (EN)": {
+      "baidu": {
+        "code": "en",
+        "original": true,
+        "results": true
       },
-      "google":{
-        "code":"da",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "en",
+        "original": true,
+        "results": true
       }
     },
-    "乌克兰语 (UK)":{
-      "baidu":{
-        "code":"dk",
-        "original" : true,
-        "results" : true
+    "丹麦 (DA)": {
+      "baidu": {
+        "code": "da",
+        "original": true,
+        "results": true
       },
-      "google":{
-        "code":"dk",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "da",
+        "original": true,
+        "results": true
       }
     },
-    "俄罗斯 (RU)":{
-      "baidu":{
-        "code":"ru",
-        "original" : true,
-        "results" : true
+    "乌克兰语 (UK)": {
+      "baidu": {
+        "code": "dk",
+        "original": true,
+        "results": true
       },
-      "google":{
-        "code":"ru",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "dk",
+        "original": true,
+        "results": true
       }
     },
-    "印尼语 (ID)":{
-      "baidu":{
-        "code":"id",
-        "original" : true,
-        "results" : true
+    "俄罗斯 (RU)": {
+      "baidu": {
+        "code": "ru",
+        "original": true,
+        "results": true
       },
-      "google":{
-        "code":"id",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "ru",
+        "original": true,
+        "results": true
       }
     },
-    "土耳其 (TR)":{
-      "baidu":{
-        "code":"tr",
-        "original" : true,
-        "results" : true
+    "印尼语 (ID)": {
+      "baidu": {
+        "code": "id",
+        "original": true,
+        "results": true
       },
-      "google":{
-        "code":"tr",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "id",
+        "original": true,
+        "results": true
       }
     },
-    "德国 (DE)":{
-      "baidu":{
-        "code":"de",
-        "original" : true,
-        "results" : true
+    "土耳其 (TR)": {
+      "baidu": {
+        "code": "tr",
+        "original": true,
+        "results": true
       },
-      "google":{
-        "code":"de",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "tr",
+        "original": true,
+        "results": true
       }
     },
-    "意大利语 (IT)":{
-      "baidu":{
-        "code":"it",
-        "original" : true,
-        "results" : true
+    "德国 (DE)": {
+      "baidu": {
+        "code": "de",
+        "original": true,
+        "results": true
       },
-      "google":{
-        "code":"it",
-        "original" : true,
-        "results" : true
+      "google": {
+        "code": "de",
+        "original": true,
+        "results": true
+      }
+    },
+    "意大利语 (IT)": {
+      "baidu": {
+        "code": "it",
+        "original": true,
+        "results": true
+      },
+      "google": {
+        "code": "it",
+        "original": true,
+        "results": true
       }
     }
   }

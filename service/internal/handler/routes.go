@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	lang "translation/internal/handler/lang"
+	translation "translation/internal/handler/translation"
 	"translation/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -25,5 +26,19 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithPrefix("/lang"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.TranslationMiddleware},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/translation_json",
+					Handler: translation.JsonTranslationHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithPrefix("/translation"),
 	)
 }

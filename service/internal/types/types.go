@@ -2,7 +2,7 @@
 package types
 
 type GetLangListReq struct {
-	Platform string `json:"platform"`
+	Platform string `form:"platform"`
 }
 
 type LangData struct {
@@ -17,12 +17,22 @@ type GetLangListResp struct {
 }
 
 type PlatformData struct {
-	Lang     string `json:"lang"`
-	Code     string `json:"code"`
-	Original bool   `json:"original"`
-	Results  bool   `json:"results"`
+	Name    string `json:"name"`
+	Code    string `json:"code"`
+	Default bool   `json:"default"`
 }
 
 type GetPlatformListResp struct {
-	LangList []PlatformData `json:"platform_list"`
+	Platformist []PlatformData `json:"platform_list"`
+}
+
+type TranslationJsonReq struct {
+	IsKeyAsTr bool              `json:"isKeyAsTr"`
+	Original  string            `json:"original"`
+	Results   string            `json:"results"`
+	Json      map[string]string `json:"json"`
+}
+
+type TranslationJsonResp struct {
+	Json map[string]string `json:"json"`
 }

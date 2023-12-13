@@ -1,7 +1,7 @@
 <template>
-    <TransitionRoot as="template" :show="editorInfo.resultsSelectLangDialogShow">
+    <TransitionRoot as="template" :show="translationStore.resultsSelectLangDialogShow">
         <Teleport to="body">
-            <Dialog as="div" class="relative z-50" @close="editorInfo.resultsSelectLangDialogShow = false">
+            <Dialog as="div" class="relative z-50" @close="translationStore.resultsSelectLangDialogShow = false">
                 <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                     leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
                     <div
@@ -20,7 +20,7 @@
                                 <div class="flex items-center">
                                     <span class="flex-1 text-indigo-600 font-semibold">添加输出语言</span>
                                     <XMarkIcon class="w-4 h-4 text-xs"
-                                        @click="editorInfo.resultsSelectLangDialogShow = false" />
+                                        @click="translationStore.resultsSelectLangDialogShow = false" />
                                 </div>
                                 <!-- 选择语言 -->
                                 <div class="mt-2">
@@ -53,15 +53,15 @@
                                 <div class="mt-4 flex items-center justify-center">
                                     <span class="text-xs font-extralight flex-1 dark:text-slate-200">选中 : </span>
                                     <span>
-                                        <button type="button" @click="editorInfo.uncheckAll"
+                                        <button type="button" @click="translationStore.uncheckAll"
                                             class="rounded bg-indigo-50 dark:bg-slate-800 px-2 py-1 text-xs font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 dark:hover:bg-dark-bg-grey">
                                             清除所有
                                         </button></span>
                                 </div>
 
                                 <div class="mt-2 flex flex-wrap">
-                                    <button type="button" v-for="item in editorInfo.selectedList" :key="item.code"
-                                        @click="editorInfo.uncheckById(item.id)"
+                                    <button type="button" v-for="item in translationStore.selectedList" :key="item.code"
+                                        @click="translationStore.uncheckById(item.id)"
                                         class="flex justify-center  rounded bg-inherit px-2 py-1 text-xs font-semibold text-slate-500 shadow-sm hover:bg-indigo-100  dark:hover:bg-dark-bg-grey  mr-2 mt-1 w-14">
                                         <span class="flex-1 dark:text-slate-200">{{ item.code }}</span>
                                         <XMarkIcon class="ml-3 w-3 h-4 text-xs" />
@@ -69,7 +69,7 @@
                                 </div>
 
                                 <div class="w-full mt-2">
-                                    <button type="button"
+                                    <button type="button" @click="translationStore.resultsSelectLangDialogShow = false"
                                         class="w-full justify-center inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                         <CheckCircleIcon class="-ml-0.5 h-5 w-5" aria-hidden="true" />
                                         确认语言
@@ -87,33 +87,31 @@
 <script lang="ts" setup>
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
-import { useEditorStore } from "~/store/editor"
+import { useTranslationStore } from "~/store/translation"
 
-const editorInfo = useEditorStore()
+const translationStore = useTranslationStore()
 const findText = ref("")
 
-
 const findList = computed(() => {
-    return editorInfo.originalLangList.filter((item) => {
+    return translationStore.originalLangList.filter((item) => {
         return item.lang.includes(findText.value)
     })
 })
 
-watch(() => editorInfo.originalLangList, (_, nlv) => {
-    editorInfo.selectedList = nlv.filter((item) => {
+watch(() => translationStore.originalLangList, (_, nlv) => {
+    translationStore.selectedList = nlv.filter((item) => {
         return item.check
     })
-    return editorInfo.selectedList
+    return translationStore.selectedList
 }, {
     deep: true
 })
 
-onMounted(() => {
-    editorInfo.getLangList()
-})
+
 </script>
 
 <style lang="scss" scoped>
+
 ::-webkit-scrollbar {
     width: 4px;
     border-radius: 8px;
@@ -123,4 +121,5 @@ onMounted(() => {
     background-color: #757575;
     border-radius: 2rem;
 }
+
 </style>

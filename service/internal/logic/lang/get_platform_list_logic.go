@@ -2,8 +2,6 @@ package lang
 
 import (
 	"context"
-	"fmt"
-
 	"translation/internal/svc"
 	"translation/internal/types"
 
@@ -26,6 +24,15 @@ func NewGetPlatformListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *G
 
 func (l *GetPlatformListLogic) GetPlatformList() (resp *types.GetPlatformListResp, err error) {
 	// todo: add your logic here and delete this line
-	fmt.Println(123123)
-	return
+	resp = &types.GetPlatformListResp{
+		Platformist: make([]types.PlatformData, 0),
+	}
+	for _, v := range l.svcCtx.LangInfo.TypeList {
+		resp.Platformist = append(resp.Platformist, types.PlatformData{
+			Name:    v.Name,
+			Code:    v.Code,
+			Default: v.IsDefault,
+		})
+	}
+	return resp, nil
 }

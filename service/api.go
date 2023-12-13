@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
 	"log"
+	"translation/internal/middleware"
 
 	"translation/internal/config"
 	"translation/internal/handler"
@@ -27,12 +29,13 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 
 	langInfo := &svc.LangInfo{}
+	logx.MustSetup(c.Log)
 	err := json.Unmarshal(JsonLang, langInfo)
 	if err != nil {
-		log.Fatalf("lang.json 解析错误")
+		log.Fatalf("lang.json parse error")
 	}
 
-	server := rest.MustNewServer(c.RestConf)
+	server := rest.MustNewServer(c.RestConf, middleware.Cors())
 	defer server.Stop()
 
 	ctx := svc.NewServiceContext(c, *langInfo)
@@ -40,6 +43,5 @@ func main() {
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 
-	fmt.Printf("%+v\n", langInfo)
 	server.Start()
 }
