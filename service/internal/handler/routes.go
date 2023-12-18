@@ -3,6 +3,7 @@ package handler
 
 import (
 	"net/http"
+	"time"
 
 	lang "translation/internal/handler/lang"
 	translation "translation/internal/handler/translation"
@@ -40,5 +41,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithPrefix("/translation"),
+		rest.WithTimeout(30000*time.Millisecond),
 	)
 }

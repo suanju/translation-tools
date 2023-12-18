@@ -9,11 +9,11 @@ type (
         IsKeyAsTr bool `json:"isKeyAsTr"`
         Original string `json:"original"`
         Results string `json:"results"`
-        Json map[string]string `json:"json"`
+        Json string `json:"json"`
     }
 
     TranslationJsonResp {
-        Json  map[string]string `json:"json"`
+        Json string `json:"json"`
     }
 )
 
@@ -21,6 +21,7 @@ type (
     group: translation
     prefix: /translation
     middleware: TranslationMiddleware
+    timeout: 30s
 )
 
 service api {

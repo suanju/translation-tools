@@ -34,10 +34,10 @@
     "pinia": "^2.1.6",
     "sweetalert2": "^11.7.27",
     "typescript": "^5.2.2",
+    "v-wave": "^2.0.0",
     "vee-validate": "^4.11.3",
     "vue-heroicons": "^0.9.4",
     "vue-loading-overlay": "^6.0.3",
-    "vue-ripple-directive": "^2.0.1",
     "vue-toastification": "^2.0.0-rc.5",
     "yup": "^1.2.0"
   },

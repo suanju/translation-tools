@@ -21,6 +21,8 @@ export const useEditorStore = defineStore("editor", () => {
     const editorError = ref<EditorErrerList>([])
     //编辑器是否显示错误提示
     const editorTipsShow = ref<EditorTipsShow>(false)
+    //是否正在加载结果
+    const isLoadingResult = ref(false)
 
     const setEditorError = (info: monaco.editor.IMarker[]) => {
         editorError.value = info
@@ -28,6 +30,7 @@ export const useEditorStore = defineStore("editor", () => {
     return {
         editorError,
         editorTipsShow,
+        isLoadingResult,
         setEditorError
     }
 

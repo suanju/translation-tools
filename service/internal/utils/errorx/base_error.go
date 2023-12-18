@@ -1,7 +1,6 @@
 package errorx
 
 import (
-	"github.com/pkg/errors"
 	xerror "github.com/zeromicro/x/errors"
 	"translation/internal/utils/results"
 )
@@ -13,10 +12,9 @@ func NewCodeError(code int, err error) error {
 	}
 }
 
-func NewDefaultError(err error) error {
-	return NewCodeError(results.CodeDefaultError, err)
-}
-
-func NewDefaultErrorMessage(msg string) error {
-	return NewCodeError(results.CodeDefaultError, errors.New(msg))
+func NewCodeErrorByDefaultMsg(code int) error {
+	return &xerror.CodeMsg{
+		Code: code,
+		Msg:  results.Message[code],
+	}
 }

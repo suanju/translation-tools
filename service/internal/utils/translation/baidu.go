@@ -17,19 +17,19 @@ const (
 	ContentType = "application/x-www-form-urlencoded"
 )
 
-type TransResult struct {
+type TransBaiduResult struct {
 	Src string `json:"src"`
 	Dst string `json:"dst"`
 }
-type TranslateResp struct {
-	From        string        `json:"from"`
-	To          string        `json:"to"`
-	TransResult []TransResult `json:"trans_result"`
-	ErrorCode   string        `json:"error_code"`
-	ErrorMsg    string        `json:"error_msg"`
+type TranslateBaiduResp struct {
+	From        string             `json:"from"`
+	To          string             `json:"to"`
+	TransResult []TransBaiduResult `json:"trans_result"`
+	ErrorCode   string             `json:"error_code"`
+	ErrorMsg    string             `json:"error_msg"`
 }
 
-func TranslateByBaidu(text, fromLang, toLang, APPID, KEY string) (resp TranslateResp, err error) {
+func TranslateByBaidu(text, fromLang, toLang, APPID, KEY string) (resp TranslateBaiduResp, err error) {
 	salt := time.Now().String()
 	sign := generateSign(text, salt, APPID, KEY)
 	params := url.Values{}
@@ -45,7 +45,7 @@ func TranslateByBaidu(text, fromLang, toLang, APPID, KEY string) (resp Translate
 		logx.Errorf("io readAll error :%s", err)
 		return resp, err
 	}
-	resp, err = parseTranslationResponse(body)
+	resp, err = parseTranslationResponseByBaidu(body)
 	if err != nil {
 		return resp, err
 	}
@@ -58,8 +58,8 @@ func generateSign(text, salt, APPID, KEY string) string {
 	return hex.EncodeToString(signBytes[:])
 }
 
-func parseTranslationResponse(response []byte) (resp TranslateResp, err error) {
-	resp = TranslateResp{}
+func parseTranslationResponseByBaidu(response []byte) (resp TranslateBaiduResp, err error) {
+	resp = TranslateBaiduResp{}
 	err = json.Unmarshal(response, &resp)
 	if err != nil {
 		logx.Errorf("json unmarshal error :%s", response)

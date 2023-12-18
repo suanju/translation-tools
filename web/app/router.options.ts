@@ -11,11 +11,6 @@ export default <RouterConfig>{
                     name:"translation",
                     path :"",
                     component: () => import('~/pages/index/index.vue'),
-                },
-                {
-                    name: 'setting',
-                    path: '/setting',
-                    component: () => import('~/pages/setting/setting.vue')
                 }
             ]
         }

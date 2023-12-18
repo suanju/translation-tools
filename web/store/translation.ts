@@ -1,4 +1,4 @@
-import type { ResultsSelectLangDialog, PlatformItem, PlatformList, OriginalLangListItem, OriginalLangList, SelectedList, translationLangList,TranslationLangItem } from '~/types/store/translation';
+import type { ResultsSelectLangDialog, PlatformItem, PlatformList, OriginalLangListItem, OriginalLangList, SelectedList, translationLangList, TranslationLangItem } from '~/types/store/translation';
 import { defineStore } from "pinia"
 import { httpGetLangList, httpGetPlatformList } from '~/apis/translation';
 
@@ -40,33 +40,42 @@ export const useTranslationStore = defineStore("translation", () => {
         const data = await httpGetLangList({
             platform: selectPlatform.value.code
         })
+        originalLangList.value = []
         data.data.lang_list.map((item) => {
-            originalLangList.value.push(<OriginalLangListItem>{
-                id: item.id,
-                lang: item.lang,
-                code: item.code,
-                original: item.original,
-                results: item.results,
-                check: false
-            })
+            item.original && (
+                originalLangList.value.push(<OriginalLangListItem>{
+                    id: item.id,
+                    lang: item.lang,
+                    code: item.code,
+                    original: item.original,
+                    results: item.results,
+                    check: false
+                })
+            )
         })
+        //默认自动选择
+        selectedOriginalLang.value = originalLangList.value.filter((item) =>{
+            return item.lang === "自动选择 (AUTO)"
+        })[0]
         filterLang()
     }
 
     const filterLang = () => {
+        originalTranslationLang.value = []
         originalLangList.value.forEach((item) => {
-            item.original && (originalTranslationLang.value.push({
+            console.log(item.results,item.lang)
+            item.results && (originalTranslationLang.value.push({
                 lang: item.lang,
                 code: item.code
             }));
         })
+        selectedList.value = []
     }
 
 
-    const uncheckById = (id: number) => {
-        console.log(originalLangList.value)
+    const uncheckById = (code: string) => {
         originalLangList.value.map((item, index) => {
-            if (item.id == id) originalLangList.value[index].check = false
+            if (item.code == code) originalLangList.value[index].check = false
         })
     }
 

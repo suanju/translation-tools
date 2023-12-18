@@ -6,8 +6,8 @@
       "default": true
     },
     {
-      "name": "谷歌翻译",
-      "code": "google",
+      "name": "deepL",
+      "code": "deepl",
       "Default": false
     }
   ],
@@ -18,8 +18,8 @@
         "original": true,
         "results": false
       },
-      "google": {
-        "code": "auto",
+      "deepl": {
+        "code": "",
         "original": true,
         "results": false
       }
@@ -30,8 +30,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "zh",
+      "deepl": {
+        "code": "ZH",
         "original": true,
         "results": true
       }
@@ -42,8 +42,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "en",
+      "deepl": {
+        "code": "EN",
         "original": true,
         "results": true
       }
@@ -54,8 +54,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "da",
+      "deepl": {
+        "code": "DA",
         "original": true,
         "results": true
       }
@@ -66,8 +66,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "dk",
+      "deepl": {
+        "code": "UK",
         "original": true,
         "results": true
       }
@@ -78,8 +78,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "ru",
+      "deepl": {
+        "code": "RU",
         "original": true,
         "results": true
       }
@@ -90,8 +90,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "id",
+      "deepl": {
+        "code": "ID",
         "original": true,
         "results": true
       }
@@ -102,8 +102,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "tr",
+      "deepl": {
+        "code": "TR",
         "original": true,
         "results": true
       }
@@ -114,8 +114,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "de",
+      "deepl": {
+        "code": "DE",
         "original": true,
         "results": true
       }
@@ -126,8 +126,8 @@
         "original": true,
         "results": true
       },
-      "google": {
-        "code": "it",
+      "deepl": {
+        "code": "IT",
         "original": true,
         "results": true
       }

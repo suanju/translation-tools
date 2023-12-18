@@ -30,9 +30,9 @@ export interface HttpGetTranslationJsonReq {
     isKeyAsTr: boolean
     original: string
     results: string
-    json: Record<string, string>
-}
+    json:string
 
+}
 export interface HttpGetTranslationJsonResp {
-    json: Record<string, string>
+    json: string
 }

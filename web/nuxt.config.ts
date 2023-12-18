@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/tailwindcss',
     "@tailwindcss/forms",
-    'nuxt-svgo'
+    'nuxt-svgo', 
+    'v-wave/nuxt'
   ],
   runtimeConfig: {
     public: {
@@ -31,9 +32,6 @@ export default defineNuxtConfig({
     storage: 'localStorage'
   },
   vite: {
-    optimizeDeps: {
-      include: ['vue-ripple-directive'],
-    },
     css: {
         scss: {
           additionalData: '@use "@/assets/css/variables.scss" as *;'

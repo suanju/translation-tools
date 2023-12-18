@@ -23,7 +23,7 @@
                                         <XMarkIcon @click="globalStore.settingShow = false" class="h-5 w-5 text-gray-400"
                                             aria-hidden="true" />
                                     </div>
-                                    <div class="mt-6">
+                                    <div class="mt-6 h-[20rem] relative">
                                         <div>
                                             <label for="type"
                                                 class="block text-sm font-medium leading-6 dark:text-slate-200 text-gray-900">翻译接口</label>
@@ -55,7 +55,8 @@
                                                                             selected ? 'font-medium' : 'font-normal',
                                                                             'block truncate',
                                                                         ]">{{ person.name }}</span>
-                                                                        <span v-if="person.code == translationStore.selectPlatform.code"
+                                                                        <span
+                                                                            v-if="person.code == translationStore.selectPlatform.code"
                                                                             class="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
                                                                             <CheckIcon class="h-5 w-5" aria-hidden="true" />
                                                                         </span>
@@ -67,7 +68,7 @@
                                                 </Listbox>
                                             </div>
                                         </div>
-                                        <div class="mt-3">
+                                        <div class="mt-3" v-show="translationStore.selectPlatform.code == 'baidu'">
                                             <label for="appid"
                                                 class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200">APPID</label>
                                             <div class="mt-2">
@@ -86,7 +87,7 @@
                                             </div>
                                         </div>
                                         <button @click="save" type="button"
-                                            class="rounded-lg w-full  mt-10 bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">保存设置</button>
+                                            class="rounded-lg w-full  absolute bottom-4 bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">保存设置</button>
                                     </div>
                                 </div>
                             </DialogPanel>
@@ -121,5 +122,9 @@ const save = () => {
         title: "保存成功"
     });
 }
+
+watch(() => translationStore.selectPlatform?.code, () => {
+    translationStore.getLangList()
+})
 
 </script>

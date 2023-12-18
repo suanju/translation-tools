@@ -1,6 +1,7 @@
 import axios from 'axios';
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import Swal from 'sweetalert2'
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import { useToast, POSITION } from "vue-toastification";
+import { useTranslationStore } from '~/store/translation';
 
 interface Result {
     code: number;
@@ -12,12 +13,6 @@ interface ResultData<T = any> extends Result {
     data?: T;
 }
 
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top',
-    showConfirmButton: false,
-    timer: 3000,
-})
 
 enum RequestEnums {
     TIMEOUT = 60000,//置超时时间
@@ -32,6 +27,7 @@ class RequestHttp {
     service: AxiosInstance;
     public constructor() {
         //获取公共配置
+        const translationStore = useTranslationStore()
         const runtimeConfig = useRuntimeConfig();
         const config = <AxiosRequestConfig>{
             baseURL: runtimeConfig.public.baseApi,
@@ -43,7 +39,10 @@ class RequestHttp {
          * 请求拦截器
          */
         this.service.interceptors.request.use(
-            (config: any) => {
+            (config: InternalAxiosRequestConfig) => {
+                translationStore.selectPlatform?.code && (config.headers['platform_code'] = translationStore.selectPlatform.code)
+                translationStore.APPID && (config.headers['app_id'] = translationStore.APPID)
+                translationStore.KEY && (config.headers['app_key'] = translationStore.KEY)
                 return {
                     ...config,
                 }
@@ -71,6 +70,7 @@ class RequestHttp {
                 return data;
             },
             (error: AxiosError) => {
+                console.log(error)
                 if (error.code == "ERR_NETWORK") {
                     return Promise.reject(error)
                 }
@@ -80,9 +80,8 @@ class RequestHttp {
                     this.handleCode(response.status)
                 }
                 if (!window.navigator.onLine) {
-                    Toast.fire({
-                        icon: 'error',
-                        title: '网络连接失败'
+                    useToast().error("网络异常", {
+                        position: POSITION.BOTTOM_RIGHT
                     })
                 }
             }
@@ -92,10 +91,7 @@ class RequestHttp {
     handleCode(code: number): void {
         switch (code) {
             default:
-                Toast.fire({
-                    icon: 'error',
-                    title: '请求失败'
-                })
+                //错误响应
                 break;
         }
     }

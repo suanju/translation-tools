@@ -3,9 +3,10 @@
     <div class="main border rounded-2xl dark:border-dark-border-primary">
       <div class="flex">
         <!-- 切换按钮 -->
-        <div v-ripple @click="submit" class="w-24 h-24 bg-indigo-600 z-50 absolute rounded-full flex items-center justify-center"
-          style="left:calc(50% + 5.2rem); top:56%">
-          <switchIcon class="w-12 h-12 text-white" :fontControlled="false" filled></switchIcon>
+        <div v-wave @click="submit"
+          class="w-28 h-28 bg-indigo-600 z-50 absolute rounded-full flex items-center justify-center"
+          style="left:calc(50% + 5.2rem); top:56%;">
+          <switchIcon class="w-16 h-16 text-white" :fontControlled="false" filled></switchIcon>
         </div>
         <div class="w-1/2">
           <OriginalEditot v-if="monacoReady"></OriginalEditot>
@@ -36,10 +37,9 @@ import { useEditorStore, monacoEditor, resultsMonacoEditor } from "~/store/edito
 import { httpGetTranslationJson } from "~/apis/translation";
 import type { HttpGetTranslationJsonReq } from "~/types/apis/translation";
 import { useTranslationStore } from "~/store/translation";
-import { useToast,POSITION } from "vue-toastification";
+import { useToast, POSITION } from "vue-toastification";
 
 const monacoReady = ref(false);
-const isLoading = ref(true)
 const editorStore = useEditorStore()
 const translationStore = useTranslationStore()
 
@@ -51,20 +51,45 @@ const submit = async () => {
   }
   monacoEditor.getAction("editor.action.formatDocument").run()
   //进行请求转化  
-  //值翻译单语言
-  const resp = await httpGetTranslationJson(<HttpGetTranslationJsonReq>{
-    isKeyAsTr: true,
-    original: translationStore.selectedOriginalLang.code,
-    results: 'en',
-    json: JSON.parse(monacoEditor.getValue())
-  })
-  const text = JSON.stringify(resp.data.json)
-  resultsMonacoEditor.setValue(text)
-  resultsMonacoEditor.getAction("editor.action.formatDocument").run()
-  useToast().success("翻译成功",{
-    position:POSITION.BOTTOM_RIGHT
-  })
+  if (!translationStore.selectedList.length) {
+    useToast().error("未添加翻译语言", {
+      position: POSITION.BOTTOM_RIGHT
+    })
+    return false;
+  }
+  if (translationStore.selectedList.length == 1) {
+    editorStore.isLoadingResult = true
+    //翻译单语言
+    try {
+      const resp = await httpGetTranslationJson(<HttpGetTranslationJsonReq>{
+        isKeyAsTr: true,
+        original: translationStore.selectedOriginalLang.code,
+        results: translationStore.selectedList[0].code,
+        json: monacoEditor.getValue()
+      })
+      const text = resp.data.json
+      resultsMonacoEditor.updateOptions({ readOnly: false });
+      resultsMonacoEditor.setValue(text)
+      await resultsMonacoEditor.getAction("editor.action.formatDocument").run()
+      resultsMonacoEditor.updateOptions({ readOnly: false });
+      useToast().success("翻译成功", {
+        position: POSITION.BOTTOM_RIGHT
+      })
+    } catch (err) {
+      editorStore.isLoadingResult = false
+      useToast().error(err.msg ? err.msg : "发生异常", {
+        position: POSITION.BOTTOM_RIGHT
+      })
+    }
+  } else {
+    //翻译多语言
+    useToast().warning("暂不支持翻译多种类", {
+        position: POSITION.BOTTOM_RIGHT
+    })
+    return false
+  }
 
+  editorStore.isLoadingResult = false
 }
 
 

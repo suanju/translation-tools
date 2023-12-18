@@ -27,12 +27,12 @@ type GetPlatformListResp struct {
 }
 
 type TranslationJsonReq struct {
-	IsKeyAsTr bool              `json:"isKeyAsTr"`
-	Original  string            `json:"original"`
-	Results   string            `json:"results"`
-	Json      map[string]string `json:"json"`
+	IsKeyAsTr bool   `json:"isKeyAsTr"`
+	Original  string `json:"original"`
+	Results   string `json:"results"`
+	Json      string `json:"json"`
 }
 
 type TranslationJsonResp struct {
-	Json map[string]string `json:"json"`
+	Json string `json:"json"`
 }

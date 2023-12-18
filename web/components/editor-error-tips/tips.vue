@@ -15,7 +15,7 @@
                 <div class="flex items-center justify-center">
                     <TipsCorrectIcon class="w-10 h-10" :fontControlled="false" filled />
                 </div>
-                <div class="mt-8 w-60"> 没有检测到任何语法错误。你的文件看起来完全没有问题!</div>
+                <div class="mt-8 w-60 dark:text-white"> 没有检测到任何语法错误。你的文件看起来完全没有问题!</div>
             </div>
             <!-- 错误列表 -->
             <div class="mt-10 mx-10 " v-show="editorInfo.editorError.length">

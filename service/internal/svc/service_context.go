@@ -6,8 +6,10 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	zhTranslations "github.com/go-playground/validator/v10/translations/zh"
+	"github.com/zeromicro/go-zero/rest"
 	"reflect"
 	"translation/internal/config"
+	"translation/internal/middleware"
 )
 
 type TypeList []struct {
@@ -28,12 +30,14 @@ type LangInfo struct {
 type ServiceContext struct {
 	Config config.Config
 	LangInfo
+	TranslationMiddleware rest.Middleware
 }
 
 func NewServiceContext(c config.Config, list LangInfo) *ServiceContext {
 	return &ServiceContext{
-		Config:   c,
-		LangInfo: list,
+		Config:                c,
+		LangInfo:              list,
+		TranslationMiddleware: middleware.NewTranslationMiddleware().Handle,
 	}
 }
 

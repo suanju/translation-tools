@@ -7,7 +7,7 @@
         <Listbox as="div" v-model="translationStore.selectedOriginalLang">
           <div class="relative">
             <ListboxButton
-              class="relative w-full cursor-default rounded-md bg-white  dark:bg-dark-bg-primary py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-ring-primary focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              class="relative w-full min-w-36 cursor-default rounded-md bg-white  dark:bg-dark-bg-primary py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-ring-primary focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
               <span class="block truncate font-extralight dark:text-white">{{ translationStore.selectedOriginalLang.lang
               }}</span>
               <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -81,7 +81,7 @@
         </Listbox>
       </div>
 
-      <button type="button" @click="uploadFile"
+      <button v-wave type="button" @click="uploadFile"
         class=" w-32 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
         选择文件
       </button>
@@ -110,12 +110,25 @@ const codeEditorRef = ref(null);
 const editorStore = useEditorStore()
 const globalStore = useGlobalStore()
 const translationStore = useTranslationStore()
+const defaultValue = `{
+    "你好": "Hello",
+    "谢谢": "Thank you",
+    "再见": "Goodbye",
+    "早上好": "Good morning",
+    "晚上好": "Good evening",
+    "午安": "Good afternoon",
+    "请": "Please",
+    "对不起": "Sorry",
+    "是的": "Yes",
+    "不是": "No"
+}
+`
 
 const formatArr = [
   { id: 1, language: "json" }
 ];
 
-translationStore.selectedOriginalLang = translationStore.originalLangList[0]
+
 const formatSelected = ref(formatArr[0]);
 
 
@@ -157,7 +170,7 @@ onMounted(() => {
   codeEditorRef.value.style.height = "calc(100vh - 64px - 5rem - 4.2rem)";
   let example = monaco.editor.create(codeEditorRef.value as HTMLElement, {
     theme, // 主题
-    value: "{{'得到' ：  ，， '$schema':  1} 12}", // 默认显示的值
+    value: defaultValue, // 默认显示的值
     language: "json",
     folding: true, // 是否折叠
     foldingHighlight: true, // 折叠等高线
