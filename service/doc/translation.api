@@ -21,7 +21,7 @@ type (
     group: translation
     prefix: /translation
     middleware: TranslationMiddleware
-    timeout: 30s
+    timeout: 60s
 )
 
 service api {
