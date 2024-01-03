@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2024-01-02 18:40:01
- * @LastEditTime: 2024-01-02 18:51:19
+ * @LastEditTime: 2024-01-03 16:57:12
  * @LastEditors: your name
  * @Description: 
  * @FilePath: \mfn-translation\README.md
@@ -10,6 +10,10 @@
 
 
 **项目环境 go 1.21 node 18.17.1**
+
+项目预览
+
+![image](https://github.com/suanju/translation-tools/blob/main/data/cover.png?raw=true)
 
 项目目前支持接口 百度翻译 deepl 目前仅支持处理json格式翻译
 
@@ -31,7 +35,7 @@ go run .\api.go -f .\etc\api.yaml
 go build
 ```
 
-其他项目结构参考 [Nuxt3](https://go-zero.dev/)
+其他项目结构参考 [go-zero](https://go-zero.dev/)
 
 
 ###### web基于Nuxt3 启动 建议使用 yarn
